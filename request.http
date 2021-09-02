@@ -1,0 +1,28 @@
+// ================== AUTH ==================
+# Register
+###
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "tranleanhvu10011999@gmail.com",
+    "password": "TranTheNam1999@"
+}
+
+# Login
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "tranleanhvu10011999@gmail.com",
+    "password": "TranTheNam1999@"
+}
+
+
+// ================== ACCOUNT ==================
+# Get short information
+###
+GET http://localhost:5000/api/account/short-information
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJpYXQiOjE2MzA1OTUyOTh9.ctUsv50erpYkOrre7Wm8DPeKc1rqcEhHUA5Fxr7jwDk
