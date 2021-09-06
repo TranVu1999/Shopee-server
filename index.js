@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
+const shopRouter = require('./routes/shop');
 
 // connect mongodb
 const connectDB = async () =>{
@@ -42,6 +43,7 @@ app.use((req, res, next) =>{
 // routes
 app.use('/api/auth', authRouter);
 app.use('/api/account', accountRouter);
+app.use('/api/shop', shopRouter);
 
 
 const POST = 5000;

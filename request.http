@@ -16,7 +16,17 @@ Content-Type: application/json
 
 {
     "email": "tranleanhvu10011999@gmail.com",
-    "password": "TranTheNam1999@"
+    "password": "TranTheNam1999@",
+    "role": "user"
+}
+
+# Login
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "socialToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjZGFiZDIwNzVjODQxNDI0NDY3MTNlM2U0NGU5ZDcxOGU3YzJkYjQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiVsWpIFRy4bqnbiBMw6ogQW5oIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdnQUNnOU9sRnlzUjFVQzY4TmtQelZCN1hOUjRGbGpVM3JkY0xGNUJ3PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3Nob3BlZS01ZGE3ZCIsImF1ZCI6InNob3BlZS01ZGE3ZCIsImF1dGhfdGltZSI6MTYzMDY3OTM2NywidXNlcl9pZCI6IlN5aGxnczg0d29PSXpHSGNyU0hrbmI5U3VFNzIiLCJzdWIiOiJTeWhsZ3M4NHdvT0l6R0hjclNIa25iOVN1RTcyIiwiaWF0IjoxNjMwNjc5MzY3LCJleHAiOjE2MzA2ODI5NjcsImVtYWlsIjoidHJhbnZ1ZHBxbjEyM0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMzA4NDgwMjE3MDg3ODQwNjg5NCJdLCJlbWFpbCI6WyJ0cmFudnVkcHFuMTIzQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.KrSMmxLWsC1RuIqqEPsV1h19ToREoMB29TJWEtVsHpVkM0VQfge5kmN-d3gJ_owgmGDMMFCJ0_Ak3JFzA_ZvCxnLl0oYOMwB3ItalNUUmQXAFs23-x1xRoFm3A9RXfX4w54HHd6l_70smM3HMgszV5IAMpXhmL4fhblt_3PSKh0LSyy8RCkQRi0YxF2VXpYNxiHhYZ91bW7M9Exg6kjNKhXsWWlp9285OW2wQzU3iQPgAh5vsNWsneX9y6yBXfj1kI6Nt0Yiefx2DlLeK_hEdT3QTlGjdK8rSpc9hFIl2AU0CxS_G3VwYTAP0rIuFgW7sVEnh98Nmmomg5AEmChCFg"
 }
 
 
@@ -26,3 +36,12 @@ Content-Type: application/json
 GET http://localhost:5000/api/account/short-information
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJpYXQiOjE2MzA1OTUyOTh9.ctUsv50erpYkOrre7Wm8DPeKc1rqcEhHUA5Fxr7jwDk
+
+
+
+// ================== SHOP ==================
+# Get shop information
+###
+GET http://localhost:5000/api/shop
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus

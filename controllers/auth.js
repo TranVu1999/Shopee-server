@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const jwt_decode = require("jwt-decode");
 const bcrypt = require('bcrypt-nodejs');
 
 // Modules
@@ -7,6 +8,7 @@ const Validate = require("./../utils/validate");
 // Models
 const Account = require("./../models/account");
 const User = require("./../models/user");
+const Shop = require("./../models/shop");
 
 module.exports = {
     /**
@@ -95,22 +97,23 @@ module.exports = {
     /**
      * Login for account
     */
-     login: async function(req, res){
+    login: async function(req, res){
         const {
             email, 
             password, 
-            socialToken
+            socialToken,
+            role
         } = req.body
+        
+
+        // console.log({socialToken})
+        // console.log(jwt_decode(socialToken));
 
         try {
             if(!email || !password){
                 return res
                 .json({success: false, message: "Missing username and/or password"})
-            }
-
-            console.log({email}, {password})
-
-            
+            }          
 
             let account = null;
             const filter = {email}
@@ -129,10 +132,24 @@ module.exports = {
                 .json({success: false, message: "Incorrect username or password"})
             }
 
+            if(role === "owner"){
+                const shop_db = await Shop.findOne({account: account._id});
+                if(!shop_db){
+                    const newShop = new Shop({
+                        account: account._id
+                    });
 
+                    await newShop.save();
+                    console.log("created new shop");
+                }
+            }
+
+            
             const accessToken = jwt.sign({
-                accountId: account._id
-            }, process.env.ACCESS_TOKEN_SECRET)
+                accountId: account._id, role
+            }, process.env.ACCESS_TOKEN_SECRET);
+
+
             return res.json({
                 success: true, 
                 message: "User logged successfully", 

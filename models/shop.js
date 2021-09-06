@@ -2,19 +2,39 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ShopSchema = new Schema({
-    brandName: {
+    avatar: {
         type: String,
-        required: true
+        default: ""
+    },
+
+    backgroundImage: {
+        type: String,
+        default: ""
+    },
+
+    brand: {
+        type: String,
+        default: ""
     },
 
     alias: {
         type: String,
-        required: true
+        default: ""
+    },
+
+    images: {
+        type: Array,
+        default: []
+    },
+
+    description: {
+        type: String,
+        default: ""
     },
 
     createdDate: {
         type: Date,
-        required: true
+        default: Date.now()
     },
 
     status: {
@@ -22,16 +42,19 @@ const ShopSchema = new Schema({
         default: true
     },
 
-    listTracker: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Account"
-        }
-    ],
+    listTracker: {
+        type: Array, 
+        default: []
+    },
 
     valuateShop: {
         type: Schema.Types.ObjectId,
         ref: "ClassifyShop"
+    },
+
+    account: {
+        type: Schema.Types.ObjectId,
+        ref: "Account"
     }
 });
 

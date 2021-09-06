@@ -21,6 +21,7 @@ const verifyToken = (req, res, next) => {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         // Vì kết quả trả về chính là dữ liệu trong cái access token của nó nên có thể lấy dữ liệu thông qua cách này
         req.accountId = decoded.accountId;
+        req.role = decoded.role;
         // Lúc này, req mang theo trường userId nữa.
         next() // Cho phép vào trong router
     } catch (error) {
