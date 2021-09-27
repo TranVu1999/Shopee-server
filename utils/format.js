@@ -1,3 +1,3 @@
 module.exports = {
-    alias: str => str.replace(" ", "-")
+    alias: str => str.replace(/ /g, "-")
 }

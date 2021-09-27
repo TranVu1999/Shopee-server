@@ -15,9 +15,9 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "tranleanhvu10011999@gmail.com",
+    "userLogin": "tranleanhvu10011999@gmail.com",
     "password": "TranTheNam1999@",
-    "role": "user"
+    "role": "owner"
 }
 
 # Login
@@ -59,4 +59,126 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     "brand": "            Barista         Coffee",
     "images": [],
     "description": ""
+}
+
+
+{
+    "title": "Thương hiệu",
+    "database": ["AAA JEANS", "ABC", "ADORE DRESS", "AlRism"],
+    "moreSelection": false,
+    "nameInput": "brand",
+    "isExtended": true,
+},
+{
+    "title": "Xuất xứ",
+    "database": ["Việt Nam", "Hàn Quốc", "Trung Quốc", "Ấn Độ"],
+    "moreSelection": false,
+    "nameInput": "originPlace",
+    "isExtended": true,
+},
+{
+    "title": "Chất liệu",
+    "database": ["Voans", "chinos", "Cotton", "Lông vũ", "Nỉ"],
+    "moreSelection": true,
+    "nameInput": "material",
+    "limitSelection": 5,
+    "isExtended": true,
+},
+{
+    "title": "Cropped Top",
+    "database": ["Có", "Không"],
+    "moreSelection": false,
+    "nameInput": "croppedTop",
+},
+{
+    "title": "Petite",
+    "database": ["Có", "Không"],
+    "moreSelection": false,
+    "nameInput": "petite",
+},
+{
+    "title": "Mẫu",
+    "database": ["Họa tiết", "Sọc caro", "Hoa", "Trơn", "Chấm bi", "In", "Sọc", "Nhuộm",],
+    "moreSelection": true,
+    "nameInput": "patern",
+    "limitSelection": 5,
+    "isExtended": true,
+},
+{
+    "title": "Mùa",
+    "database": ["Mùa đông", "Mùa hè", "Mùa Thu", "Mùa xuân",],
+    "nameInput": "season",
+    "moreSelection": false,
+},
+{
+    "title": "Phong cách",
+    "database": ["Thể thao", "Cơ bản", "Boho", "Hàn Quốc", "Tối giản"],
+    "nameInput": "style",
+    "moreSelection": true,
+    "limitSelection": 5,
+    "isExtended": true,
+},
+{
+    "title": "Chiều dài áo",
+    "database": ["Dài", "Đều đặn"],
+    "nameInput": "length",
+    "moreSelection": false,
+},
+{
+    "title": "Rất lớn",
+    "database": ["Có", "Không"],
+    "nameInput": "large",
+    "moreSelection": false,
+}
+
+// ================== PRODUCT CATEGORY ==================
+# Add new product category
+###
+POST http://localhost:5000/api/product-category
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
+
+{
+    "avatar": "https://cf.shopee.vn/file/75ea42f9eca124e9cb3cde744c060e4d_tn",
+    "title": "Phụ kiện thời trang",
+    "path": [],
+    "subCategory": [
+        {
+            "title": "Nhẫn",
+            "subCategory": []
+        },
+        {
+            "title": "Bông tai",
+            "subCategory": []
+        },
+        {
+            "title": "Chăm sóc cá nhân",
+            "subCategory": []
+        }
+    ]
+}
+
+# Add new product category
+###
+POST http://localhost:5000/api/product-category
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
+
+{
+    "avatar": "https://cf.shopee.vn/file/75ea42f9eca124e9cb3cde744c060e4d_tn",
+    "title": "Phụ kiện thời trang",
+    "path": ["đường dẫn từ proudct category cha đến chỗ hiện tại"],
+    "listProductCategoy": ["list product category ở đây"]
+}
+
+
+# Add new sub product category
+###
+POST http://localhost:5000/api/product-category/sub-category
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
+
+{
+    "path": ["Thời Trang Nữ", "Áo"],
+    "subCategory": ["Áo hai dây và ba lỗ", "Áo ống", "Áo thun", "Áo sơ mi", "Áo polo", "Áo liền thân"]
 }

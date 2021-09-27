@@ -16,25 +16,25 @@ module.exports = {
     */
     register: async function(req, res){
         const {
-            email, password
+            userLogin, password
         } = req.body;
 
         
 
         try {
             res.header("Access-Control-Allow-Origin", "*");
-            if(!email || !password){
+            if(!userLogin || !password){
                 return res
                 .status(400)
                 .json({
                     success: false, 
-                    message: "Missing username and/or password"
+                    message: "Thiếu thông tin đăng nhập"
                 });
                 
             }
             
 
-            if(!Validate.validateEmail(email)){
+            if(!Validate.validateEmail(userLogin)){
                 
                 return res
                 .status(400)
@@ -45,7 +45,7 @@ module.exports = {
             }
 
             let account = null;
-            const filter = {email}
+            const filter = {userLogin}
             account = await Account.findOne(filter);
             if(account){
                 
@@ -61,11 +61,11 @@ module.exports = {
             const hashedPassword = bcrypt.hashSync(password, salt);
 
             const newAccount = new Account({
-                email,
+                userLogin,
                 password: hashedPassword,
             });
             const newUser = new User({
-                username: email.slice(0, email.indexOf("@")),
+                username: userLogin.slice(0, userLogin.indexOf("@")),
                 fullName: "",
                 phoneNumber: "",
                 account: newAccount._id
@@ -99,7 +99,7 @@ module.exports = {
     */
     login: async function(req, res){
         const {
-            email, 
+            userLogin, 
             password, 
             socialToken,
             role
@@ -110,13 +110,13 @@ module.exports = {
         // console.log(jwt_decode(socialToken));
 
         try {
-            if(!email || !password){
+            if(!userLogin || !password){
                 return res
-                .json({success: false, message: "Missing username and/or password"})
+                .json({success: false, message: "Thiếu thông tin đăng nhập"})
             }          
 
             let account = null;
-            const filter = {email}
+            const filter = {email: userLogin}
             account = await Account.findOne(filter);
             if(!account){
                 return res
@@ -143,7 +143,6 @@ module.exports = {
                     console.log("created new shop");
                 }
             }
-
             
             const accessToken = jwt.sign({
                 accountId: account._id, role
