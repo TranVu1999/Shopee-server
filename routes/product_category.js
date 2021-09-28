@@ -10,10 +10,10 @@ const productCategoryController = require('../controllers/product_category');
 // @access Private
 router.post('/', verifyToken, productCategoryController.add);
 
-// @route POST api/product-category/sub-category
-// @desc add new sub product category
-// @access Private
-router.post('/sub-category', verifyToken, productCategoryController.addSubCategory);
+// @route GET api/product-category
+// @desc get all product category
+// @access Public
+router.get('/', productCategoryController.getAll);
 
 
 

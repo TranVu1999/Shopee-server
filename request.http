@@ -138,47 +138,48 @@ POST http://localhost:5000/api/product-category
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
 
-{
-    "avatar": "https://cf.shopee.vn/file/75ea42f9eca124e9cb3cde744c060e4d_tn",
-    "title": "Phụ kiện thời trang",
-    "path": [],
-    "subCategory": [
+{ 
+    "path": ["6152dc2bb1f01e09c0adadf9"],
+    "listCat": [
         {
-            "title": "Nhẫn",
-            "subCategory": []
+            "title": "Quần jean"
         },
         {
-            "title": "Bông tai",
-            "subCategory": []
+            "title": "Hoodie & Áo nỉ"
         },
         {
-            "title": "Chăm sóc cá nhân",
-            "subCategory": []
+            "title": "Áo len"
+        },
+        {
+            "title": "Áo khoác"
+        },
+        {
+            "title": "Com lê"
+        },
+        {
+            "title": "Quần dài"
+        },
+        {
+            "title": "Quần đùi"
+        },
+        {
+            "title": "Đồ lót"
+        },
+        {
+            "title": "Đồ ngủ"
+        },
+        {
+            "title": "Bộ"
+        },
+        {
+            "title": "Trang phụ truyền thống"
+        },
+        {
+            "title": "Đồ hóa trang"
+        },
+        {
+            "title": "Trang phục hành nghề"
         }
     ]
 }
 
-# Add new product category
-###
-POST http://localhost:5000/api/product-category
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
-
-{
-    "avatar": "https://cf.shopee.vn/file/75ea42f9eca124e9cb3cde744c060e4d_tn",
-    "title": "Phụ kiện thời trang",
-    "path": ["đường dẫn từ proudct category cha đến chỗ hiện tại"],
-    "listProductCategoy": ["list product category ở đây"]
-}
-
-
-# Add new sub product category
-###
-POST http://localhost:5000/api/product-category/sub-category
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
-
-{
-    "path": ["Thời Trang Nữ", "Áo"],
-    "subCategory": ["Áo hai dây và ba lỗ", "Áo ống", "Áo thun", "Áo sơ mi", "Áo polo", "Áo liền thân"]
-}

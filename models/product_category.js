@@ -7,11 +7,16 @@ const ProductCategorySchema = new Schema({
         default: ""
     },
 
+    path: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "ProductCategory"
+        }
+    ],
+
     title:{
         type: String,
         default: "",
-        unique: true,
-        index: true
     },
 
     alias: {
@@ -19,11 +24,16 @@ const ProductCategorySchema = new Schema({
         default: ""
     },
 
-    subCategory: {
+    isTop: {
+        type: Boolean,
+        default: false
+    },
+
+    skeletonAttribute: {
         type: Array,
         default: []
     }
 });
 
-ProductCategorySchema.index({title: 'text'});
+
 module.exports = mongoose.model("ProductCategory", ProductCategorySchema)

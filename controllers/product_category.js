@@ -1,9 +1,25 @@
 // Models
+const { createConnection } = require("mongoose");
 const Account = require("./../models/account");
 const ProductCategory = require("./../models/product_category");
 
 //Modules
 const Format = require("./../utils/format");
+
+Array.prototype.equals = function (arr){
+    const lengthArr = arr.length;
+
+    if(!lengthArr) return false;
+    if(lengthArr !== this.length) return false;
+
+    for(let idex = 0; idex < lengthArr; idex++){
+
+        if(this[idex].toString() !== arr[idex].toString()) return false;
+    }
+    
+    
+    return true;
+}
 
 module.exports = {
     /**
@@ -11,7 +27,10 @@ module.exports = {
     */
     add: async function(req, res){       
         const {accountId} = req;
-        const {avatar, title, subCategory} = req.body;
+        const {
+            path,
+            listCat
+        } = req.body;
 
         try {
             const account_db = await Account.findById(accountId);
@@ -25,32 +44,47 @@ module.exports = {
                 })
             }
 
-            const prodCate_db = await ProductCategory.find({$text: {$search: title}});
-            
-            if(prodCate_db.length){
-                return res
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Danh mục này đã được tồn tại trước đó."
-                })
+            const prodCat_db = await ProductCategory.find().lean();
+
+            if(path.length){
+                const isAccept = path.every(cat => {
+                    return prodCat_db.some(cat_db => {
+                        return cat === cat_db._id.toString()
+                    })
+                });
+
+                if(!isAccept){
+                    return res
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: "Đường dẫn danh mục sản phẩm của bạn không đúng"
+                    })
+                }
             }
 
-            const fm_title = title.toLowerCase().replace(/\s+/g,' ').trim();
+            listCat.forEach(async (cat) => {
+                const isDuplicateTitle = prodCat_db.some(cat_db => cat_db.title === cat.title && cat_db.path.equals(path));
 
-            const newProductCategory = ProductCategory({
-                avatar,
-                title,
-                alias: Format.alias(fm_title),
-                subCategory
+                console.log({isDuplicateTitle})
+
+                if(!isDuplicateTitle){
+                    const fm_title = cat.title.toLowerCase().replace(/\s+/g,' ').trim();
+
+                    const newProductCategory = ProductCategory({
+                        avatar: cat.avatar || "",
+                        title: cat.title,
+                        path,
+                        alias: Format.alias(fm_title),
+                    });
+
+                    await newProductCategory.save();
+                }
             });
-
-            await newProductCategory.save();
 
             return res.json({
                 success: true,
                 message: "Dữ liệu được cập nhật",
-                productCategory: newProductCategory
             });
 
         } catch (error) {
@@ -65,46 +99,51 @@ module.exports = {
     },
 
     /**
-     * Add new product category
+     * Get all product category
     */
-    addSubCategory: async function(req, res){       
-        const {accountId} = req;
-        const {path, subCategory} = req.body;
-        console.log({path, subCategory})
+    getAll: async function(req, res){  
 
         try {
-            const account_db = await Account.findById(accountId);
+            const cats_db = await ProductCategory.find().lean();
 
-            if(!account_db){
-                return res
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Bạn không có quyền thực hiện thao tác này."
-                })
-            }
+            const topLevel = cats_db.reduce((result, cat_db) => cat_db.path.length > result ? cat_db.path.length : result, 0);
 
-            const prodCate_db = await ProductCategory.findOne({title: path[0]});
-            if(!prodCate_db){
-                return res
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Không tìm thấy danh mục sản phẩm này."
-                })
-            }
+            // format tree
+            let numberBranch = 0;
+            let listCatsInBranch = [];
 
 
-            // standard value
-            let listSubProdCate = []
-            console.log({prodCate_db})
+            do{
+                listCatsInBranch.push(
+                    cats_db.filter(cat_db => cat_db.path.length === numberBranch).map(cat_db => {
+                        return {
+                            ...cat_db, 
+                            subCategories: []
+                        }
+                    })
+                );
 
-            
+                numberBranch++;
+            }while(numberBranch <= topLevel);
 
+            for( let i = topLevel - 1; i >= 0; i--){
+
+                let lengthBranch = listCatsInBranch[i].length;
+                for( let j = 0; j < lengthBranch; j++ ){
+                    
+
+                    let subCategories =  listCatsInBranch[i + 1].filter(cat => {
+                        return cat.path[cat.path.length - 1].toString() === listCatsInBranch[i][j]._id.toString();
+                    });
+
+                    listCatsInBranch[i][j].subCategories = [...subCategories];
+                }
+            }            
 
             return res.json({
                 success: true,
                 message: "Dữ liệu được cập nhật",
+                productCategories: listCatsInBranch[0]
             });
 
         } catch (error) {
