@@ -139,47 +139,19 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
 
 { 
-    "path": ["6152dc2bb1f01e09c0adadf9"],
+    "path": ["6155d0052f6a910c7862566e", "6155d2a8c0b14438bc7cc9db"],
     "listCat": [
         {
-            "title": "Quần jean"
+            "title": "Đai hỗ trợ bụng"
         },
         {
-            "title": "Hoodie & Áo nỉ"
-        },
-        {
-            "title": "Áo len"
-        },
-        {
-            "title": "Áo khoác"
-        },
-        {
-            "title": "Com lê"
-        },
-        {
-            "title": "Quần dài"
-        },
-        {
-            "title": "Quần đùi"
-        },
-        {
-            "title": "Đồ lót"
-        },
-        {
-            "title": "Đồ ngủ"
-        },
-        {
-            "title": "Bộ"
-        },
-        {
-            "title": "Trang phụ truyền thống"
-        },
-        {
-            "title": "Đồ hóa trang"
-        },
-        {
-            "title": "Trang phục hành nghề"
+            "title": "Gối đầu"
         }
     ]
 }
+
+
+# Get all product categories
+###
+GET http://localhost:5000/api/product-category
 

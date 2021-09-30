@@ -32,6 +32,11 @@ const ProductCategorySchema = new Schema({
     skeletonAttribute: {
         type: Array,
         default: []
+    },
+
+    isActive: {
+        type: Boolean,
+        default: true
     }
 });
 

@@ -142,7 +142,7 @@ module.exports = {
 
             return res.json({
                 success: true,
-                message: "Dữ liệu được cập nhật",
+                message: "Thao tác thành công.",
                 productCategories: listCatsInBranch[0]
             });
 
