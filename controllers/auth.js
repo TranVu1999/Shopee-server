@@ -16,9 +16,10 @@ module.exports = {
     */
     register: async function(req, res){
         const {
-            userLogin, password
+            userLogin, password, role
         } = req.body;
 
+        console.log()
         
 
         try {
@@ -73,8 +74,8 @@ module.exports = {
 
             newAccount.user = newUser._id;
 
-            await newAccount.save();
-            await newUser.save();
+            // await newAccount.save();
+            // await newUser.save();
             const accessToken = jwt.sign({accountId: newAccount._id}, process.env.ACCESS_TOKEN_SECRET);
 
             return res.json({
@@ -110,26 +111,26 @@ module.exports = {
         // console.log(jwt_decode(socialToken));
 
         try {
-            if(!userLogin || !password){
+            if(!Validate.checkRequireFieldString(userLogin, password, role)){
                 return res
                 .json({success: false, message: "Thiếu thông tin đăng nhập"})
             }          
 
             let account = null;
-            const filter = {email: userLogin}
+            const filter = {userLogin, role}
             account = await Account.findOne(filter);
             if(!account){
                 return res
                 .json({
                     success: false, 
-                    message: "User is not found"
+                    message: "Không tìm thấy tài khoản này."
                 })
             }
 
             const passwordValid = bcrypt.compareSync(password, account.password);
             if(!passwordValid){
                 return res
-                .json({success: false, message: "Incorrect username or password"})
+                .json({success: false, message: "Sai thông tin tài khoản/mật khẩu"})
             }
 
             if(role === "owner"){
@@ -165,4 +166,87 @@ module.exports = {
             })
         }
     },
+
+    /**
+     * Create new account by admin
+    */
+    createNewAccount: async function(req, res){
+        const {
+            userLogin, password, role
+        } = req.body;        
+
+        try {
+            res.header("Access-Control-Allow-Origin", "*");
+            if(!Validate.checkRequireFieldString(userLogin, password, role)){
+                return res
+                .status(400)
+                .json({
+                    success: false, 
+                    message: "Thiếu thông tin tài khoản."
+                });
+                
+            }
+
+            if(!Validate.validateEmail(userLogin)){
+                
+                return res
+                .status(400)
+                .json({
+                    success: false, 
+                    message: "This account cannot be registered.",
+                });
+            }
+
+            let account = null;
+            const filter = {userLogin}
+            account = await Account.findOne(filter);
+            if(account){
+                return res
+                .status(400)
+                .json({
+                    success: false, 
+                    message: "Tài khoản này đã tồn tại."
+                })
+            }
+
+            var salt = bcrypt.genSaltSync(10);
+            const hashedPassword = bcrypt.hashSync(password, salt);
+
+            const newAccount = new Account({
+                userLogin,
+                password: hashedPassword,
+                role
+            });
+
+            const newUser = new User({
+                username: userLogin.slice(0, userLogin.indexOf("@")),
+                fullName: "",
+                phoneNumber: "",
+                email: userLogin,
+                account: newAccount._id
+            });
+
+            newAccount.user = newUser._id;
+
+            await newAccount.save();
+            await newUser.save();
+            const accessToken = jwt.sign({accountId: newAccount._id}, process.env.ACCESS_TOKEN_SECRET);
+
+            return res.json({
+                success: true,
+                message: "Account created successfully",
+                accessToken, 
+            });
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            })
+        }
+    },
+
 }

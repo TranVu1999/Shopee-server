@@ -4,29 +4,37 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     avatar: {
         type: String,
+        default: ""
     },
     
     username: {
         type: String,
-        require: true
+        default: ""
     },
 
     fullName: {
         type: String,
-        require: true
+        default: ""
     },
 
     phoneNumber: {
         type: String,
-        require: true
+        default: ""
+    },
+
+    email: {
+        type: String,
+        default: ""
     },
 
     gender: {
-        type: String
+        type: String,
+        default: "male"
     },
 
     birthday: {
-        type: Date
+        type: Date,
+        default: new Date()
     },
     
     account: {

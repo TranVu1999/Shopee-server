@@ -99,6 +99,57 @@ module.exports = {
     },
 
     /**
+     * Update product category
+    */
+    update: async function(req, res){ 
+        const prodCateId = req.params.id;
+        const {skeletonAttribute} = req.body;
+        const {accountId, role} = req; 
+
+        console.log({accountId, role});
+
+        try {
+            const admin_db = Account.findOne({_id: accountId, role});
+            if(!admin_db){
+                return res
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Bạn không có quyền sử dụng API này."
+                });
+            }
+
+            let updateProdCate = ProductCategory.findOneAndUpdate({
+                skeletonAttribute
+            }, {new: true});
+            
+            if(!updateProdCate){
+                return res
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Thao tác không thành công."
+                });
+            }
+
+            return res.json({
+                success: true,
+                message: "Thao tác thành công.",
+                productCategory: updateProdCate
+            });
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            })
+        }
+    },
+
+    /**
      * Get all product category
     */
     getAll: async function(req, res){  

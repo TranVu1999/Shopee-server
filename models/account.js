@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AccountSchema = new Schema({
-    email: {
+    userLogin: {
         type: String,
-        require: true
+        default: ""
     },
 
     password: {
         type: String,
-        require: true
+        default: ""
     },
 
     listTracker: [{
@@ -18,11 +18,13 @@ const AccountSchema = new Schema({
     }],
 
     invoices: {
-        type: Array
+        type: Array,
+        default: []
     },
 
     reports: {
-        type: Array
+        type: Array,
+        default: []
     },
     
     user: {
@@ -37,7 +39,18 @@ const AccountSchema = new Schema({
     },
     
     socialToken: {
-        type: String
+        type: String,
+        default: ""
+    },
+
+    role: {
+        type: String,
+        default: 'user'
+    },
+
+    status: {
+        type: Boolean,
+        default: true
     }
 });
 

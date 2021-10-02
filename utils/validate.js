@@ -6,5 +6,17 @@ module.exports = {
     checkSpecialCharacter: str =>{
         const re = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
         return re.test(str);
+    },
+
+/**
+ * Returns false if non parametes is passed or any a parameter is empty and otherwise
+ *
+ * @param {arguments} x The list parameters is checked
+ * @return {boolean} True/False.
+*/
+    checkRequireFieldString: (...rest) =>{
+
+
+        return rest.length > 0 && rest.every(param => (typeof param) === 'string' && param !== "");
     }
 }
