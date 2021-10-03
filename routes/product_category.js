@@ -17,12 +17,18 @@ router.post('/', verifyToken, productCategoryController.add);
 // @access Private
 router.put('/:id', verifyToken, productCategoryController.update);
 
+
 // ================= GET ==================
 
 // @route GET api/product-category
 // @desc get all product category
 // @access Public
 router.get('/', productCategoryController.getAll);
+
+// @route GET api/product-category/:id
+// @desc get product category by id
+// @access Public
+router.get('/:id/:type?', productCategoryController.getById);
 
 
 

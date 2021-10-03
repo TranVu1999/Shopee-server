@@ -5,6 +5,7 @@ const ProductCategory = require("./../models/product_category");
 
 //Modules
 const Format = require("./../utils/format");
+const Validate = require("./../utils/validate");
 
 Array.prototype.equals = function (arr){
     const lengthArr = arr.length;
@@ -19,6 +20,16 @@ Array.prototype.equals = function (arr){
     
     
     return true;
+}
+
+const handleExceptFromSystem = (err, res) =>{
+    console.log(err);
+    return res
+    .status(500)
+    .json({
+        success: false,
+        message: "Internal server error"
+    })
 }
 
 module.exports = {
@@ -103,10 +114,14 @@ module.exports = {
     */
     update: async function(req, res){ 
         const prodCateId = req.params.id;
-        const {skeletonAttribute} = req.body;
-        const {accountId, role} = req; 
+        const {
+            isTop,
+            isRoot,
+            title,
+            skeletonAttribute
+        } = req.body;
 
-        console.log({accountId, role});
+        const {accountId, role} = req; 
 
         try {
             const admin_db = Account.findOne({_id: accountId, role});
@@ -119,9 +134,28 @@ module.exports = {
                 });
             }
 
-            let updateProdCate = ProductCategory.findOneAndUpdate({
-                skeletonAttribute
-            }, {new: true});
+            if(!Validate.checkRequireFieldString(title)){
+                return res
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Dữ liệu của bạn không hợp lệ."
+                });
+            }
+
+
+            const fm_title = title.toLowerCase().replace(/\s+/g,' ').trim();
+
+            let updateProdCate = await ProductCategory.findOneAndUpdate(
+                {_id: prodCateId}, 
+                {
+                    skeletonAttribute,
+                    isTop,
+                    title: fm_title,
+                    alias: Format.alias(fm_title),
+                }, 
+                {new: true}
+            );
             
             if(!updateProdCate){
                 return res
@@ -205,6 +239,46 @@ module.exports = {
                 success: false,
                 message: "Internal server error"
             })
+        }
+    },
+
+
+    /**
+     * Get product category by id
+    */
+    getById: async function(req, res){  
+        const {id, type} = req.params;
+
+        console.log({id, type});
+
+        try {
+            let res_prodCat = null;
+
+            switch(type){
+                case 'skeleton-attribute':
+                    const filter = {_id: id, isTop: true};
+                    res_prodCat = await ProductCategory.findOne(filter);
+                    break;
+                default:
+                    break;
+            }
+            
+            if(res_prodCat){
+                return res.json({
+                    success: true,
+                    message: "Thao tác thành công.",
+                    productCategory: res_prodCat
+                });
+            }else{
+                return res
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Thao tác không thành công"
+                })
+            }
+        } catch (error) {
+            return handleExceptFromSystem(error, res);
         }
     },
 }

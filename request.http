@@ -5,9 +5,9 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "userLogin": "tranvudpqn123@gmail.com",
-    "password": "TranTheNam1999@",
-    "role": "admin"
+"userLogin": "tranvudpqn123@gmail.com",
+"password": "TranTheNam1999@",
+"role": "user"
 }
 
 # Create new account
@@ -16,9 +16,9 @@ POST http://localhost:5000/api/auth/create
 Content-Type: application/json
 
 {
-    "userLogin": "tranvudpqn123@gmail.com",
-    "password": "TranTheNam1999@",
-    "role": "admin"
+"userLogin": "tranvudpqn123@gmail.com",
+"password": "TranTheNam1999@",
+"role": "admin"
 }
 
 # Login
@@ -98,81 +98,32 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 GET http://localhost:5000/api/product-category
 
 
+# Get product category by id 
+###
+GET http://localhost:5000/api/product-category/6152e4a0da47d63a84e84473/skeleton-attribute
+
 # Update a product category
 ###
-PUT http://localhost:5000/api/product-category/6152e4a0da47d63a84e84472
+PUT http://localhost:5000/api/product-category/6152e4a0da47d63a84e84473
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzMxOTMyNTl9.O6OqmU0l0x9V16hrlj3en5OV94LSlRmb6nVYjPsgpzk
 
 {
-    "skeletonAttribute": [
-        {
-            "title": "Thương hiệu",
-            "database": ["AAA JEANS", "ABC", "ADORE DRESS", "AlRism"],
-            "moreSelection": false,
-            "nameInput": "brand",
-            "isExtended": true
-        },
-        {
-            "title": "Xuất xứ",
-            "database": ["Việt Nam", "Hàn Quốc", "Trung Quốc", "Ấn Độ"],
-            "moreSelection": false,
-            "nameInput": "originPlace",
-            "isExtended": true
-        },
-        {
-            "title": "Chất liệu",
-            "database": ["Voans", "chinos", "Cotton", "Lông vũ", "Nỉ"],
-            "moreSelection": true,
-            "nameInput": "material",
-            "limitSelection": 5,
-            "isExtended": true
-        },
-        {
-            "title": "Cropped Top",
-            "database": ["Có", "Không"],
-            "moreSelection": false,
-            "nameInput": "croppedTop"
-        },
-        {
-            "title": "Petite",
-            "database": ["Có", "Không"],
-            "moreSelection": false,
-            "nameInput": "petite"
-        },
-        {
-            "title": "Mẫu",
-            "database": ["Họa tiết", "Sọc caro", "Hoa", "Trơn", "Chấm bi", "In", "Sọc", "Nhuộm"],
-            "moreSelection": true,
-            "nameInput": "patern",
-            "limitSelection": 5,
-            "isExtended": true
-        },
-        {
-            "title": "Mùa",
-            "database": ["Mùa đông", "Mùa hè", "Mùa Thu", "Mùa xuân"],
-            "nameInput": "season",
-            "moreSelection": false
-        },
-        {
-            "title": "Phong cách",
-            "database": ["Thể thao", "Cơ bản", "Boho", "Hàn Quốc", "Tối giản"],
-            "nameInput": "style",
-            "moreSelection": true,
-            "limitSelection": 5,
-            "isExtended": true
-        },
-        {
-            "title": "Chiều dài áo",
-            "database": ["Dài", "Đều đặn"],
-            "nameInput": "length",
-            "moreSelection": false
-        },
-        {
-            "title": "Rất lớn",
-            "database": ["Có", "Không"],
-            "nameInput": "large",
-            "moreSelection": false
-        }
-    ]
+"isTop": true,
+"isRoot": false,
+"title": "Áo ống",
+"skeletonAttribute": [
+    {
+        "title": "Thương hiệu",
+        "database": [
+            "AAA JEANS",
+            "ABC",
+            "ADORE DRESS",
+            "AlRism"
+        ],
+        "moreSelection": false,
+        "nameInput": "brand",
+        "isExtended": true
+    }
+]
 }
