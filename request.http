@@ -5,9 +5,9 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-"userLogin": "tranvudpqn123@gmail.com",
-"password": "TranTheNam1999@",
-"role": "user"
+    "userLogin": "tranvudpqn123@gmail.com",
+    "password": "TranTheNam1999@",
+    "role": "admin"
 }
 
 # Create new account
@@ -16,9 +16,9 @@ POST http://localhost:5000/api/auth/create
 Content-Type: application/json
 
 {
-"userLogin": "tranvudpqn123@gmail.com",
-"password": "TranTheNam1999@",
-"role": "admin"
+    "userLogin": "tranvudpqn123@gmail.com",
+    "password": "TranTheNam1999@",
+    "role": "admin"
 }
 
 # Login
@@ -134,7 +134,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 ###
 POST http://localhost:5000/api/product
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzQ4MDg0Njl9.-ly2se0O_xXXjYQmRKmzcM-KfVs-gEViscEqZi4Ea60
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTcxN2FmZmFiNWIyNjNhMmMzMjI0MjIiLCJpYXQiOjE2MzQ4MjcwMDh9.J9oJEdszovhTvlx1H-18OVp27g15_y4KWfIG8jcPfrE
 
 { 
     "title": "Áo hai dây và ba lỗ siêu xịn",

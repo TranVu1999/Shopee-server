@@ -43,13 +43,6 @@ const ProductSchema = new Schema({
     default: [],
   },
 
-  promotion: {
-    type: Number,
-    minimum: 0,
-    maximum: 100,
-    default: 0,
-  },
-
   inventory: {
     type: Number,
     minimum: 50,
@@ -83,7 +76,7 @@ const ProductSchema = new Schema({
     default: "",
   },
 
-  shop: {
+  account: {
     type: Schema.Types.ObjectId,
     ref: "Account",
   },
