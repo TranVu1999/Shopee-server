@@ -77,8 +77,6 @@ module.exports = {
             listCat.forEach(async (cat) => {
                 const isDuplicateTitle = prodCat_db.some(cat_db => cat_db.title === cat.title && cat_db.path.equals(path));
 
-                console.log({isDuplicateTitle})
-
                 if(!isDuplicateTitle){
                     const fm_title = cat.title.toLowerCase().replace(/\s+/g,' ').trim();
 
@@ -187,7 +185,8 @@ module.exports = {
      * Get all product category
     */
     getAll: async function(req, res){  
-
+        console.log("get all");
+        
         try {
             const cats_db = await ProductCategory.find().lean();
 

@@ -100,7 +100,7 @@ GET http://localhost:5000/api/product-category
 
 # Get product category by id 
 ###
-GET http://localhost:5000/api/product-category/6152e4a0da47d63a84e84473/skeleton-attribute
+GET http://localhost:5000/api/product-category/6152e4a0da47d63a84e84472/skeleton-attribute
 
 # Update a product category
 ###
@@ -109,21 +109,92 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzMxOTMyNTl9.O6OqmU0l0x9V16hrlj3en5OV94LSlRmb6nVYjPsgpzk
 
 {
-"isTop": true,
-"isRoot": false,
-"title": "Áo ống",
-"skeletonAttribute": [
-    {
-        "title": "Thương hiệu",
-        "database": [
-            "AAA JEANS",
-            "ABC",
-            "ADORE DRESS",
-            "AlRism"
-        ],
-        "moreSelection": false,
-        "nameInput": "brand",
-        "isExtended": true
+    "isTop": true,
+    "isRoot": false,
+    "title": "Áo ống",
+    "skeletonAttribute": [
+        {
+            "title": "Thương hiệu",
+            "database": [
+                "AAA JEANS",
+                "ABC",
+                "ADORE DRESS",
+                "AlRism"
+            ],
+            "moreSelection": false,
+            "nameInput": "brand",
+            "isExtended": true
+        }
+    ]
+}
+
+
+// ================== PRODUCT ==================
+# Add new product
+###
+POST http://localhost:5000/api/product
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzQ4MDg0Njl9.-ly2se0O_xXXjYQmRKmzcM-KfVs-gEViscEqZi4Ea60
+
+{ 
+    "title": "Áo hai dây và ba lỗ siêu xịn",
+    "avatar": "https://www.123.com",
+    "video": "",
+    "categories": ["Thời Trang Nữ", "Áo", "áo hai dây và ba lỗ"],
+    "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+    "images": [],
+    "price": 150000,
+    "unused": true,
+    "sku": "A2D3L",
+    "optionalAttributes": {
+        "brand": "AAA JEANS",
+        "croppedTop": "Có",
+        "large": "Có",
+        "length": "",
+        "material": ["Voans", "chinos", "Cotton", "Lông vũ", "Nỉ"],
+        "originPlace": "Việt Nam",
+        "patern": [],
+        "petite": "Có",
+        "season": "Mùa đông",
+        "style": ["Thể thao", "Cơ bản", "Boho", "Hàn Quốc"]
+    },
+    "listPromotion": [
+        {
+           "from": 5,
+           "to": 10,
+           "discount": 25000 
+        },
+        {
+           "from": 11,
+           "to": 15,
+           "discount": 40000 
+        }
+    ],
+    "classification": {
+        "classifies": {
+            "first":{
+                "title": "Màu sắc",
+                "images": [],
+                "types": ["Trắng", "Đen"]
+            },
+            "second": {
+                "title": "Kích thước",
+                "types": ["S", "M"]
+            }
+        },
+        "tablePrice": [
+            {
+                "firstClassifyName": "Trắng",
+                "price": 150000,
+                "sku": "",
+                "inventory": 50
+            },
+            {
+                "firstClassifyName": "Đen",
+                "price": 150000,
+                "sku": "",
+                "inventory": 75
+            }
+        ]
     }
-]
 }

@@ -6,6 +6,7 @@ const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
 const shopRouter = require('./routes/shop');
 const productCategoryRouter = require('./routes/product_category');
+const productRouter = require('./routes/product');
 
 // connect mongodb
 const connectDB = async () =>{
@@ -46,6 +47,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/shop', shopRouter);
 app.use('/api/product-category', productCategoryRouter);
+app.use('/api/product', productRouter);
 
 
 const POST = 5000;
