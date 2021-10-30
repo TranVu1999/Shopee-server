@@ -100,29 +100,296 @@ GET http://localhost:5000/api/product-category
 
 # Get product category by id 
 ###
-GET http://localhost:5000/api/product-category/6152e4a0da47d63a84e84472/skeleton-attribute
+GET http://localhost:5000/api/product-category/6152dc2bb1f01e09c0adadf9/skeleton-attribute
 
 # Update a product category
 ###
-PUT http://localhost:5000/api/product-category/6152e4a0da47d63a84e84473
+PUT http://localhost:5000/api/product-category/6155cc042f6a910c786255f5
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzMxOTMyNTl9.O6OqmU0l0x9V16hrlj3en5OV94LSlRmb6nVYjPsgpzk
 
 {
     "isTop": true,
     "isRoot": false,
-    "title": "Áo ống",
+    "title": "Áo sơ mi",
     "skeletonAttribute": [
         {
             "title": "Thương hiệu",
             "database": [
                 "AAA JEANS",
-                "ABC",
-                "ADORE DRESS",
-                "AlRism"
+                "ADAM STORE",
+                "ADDICTED",
+                "AFS Jeep",
+                "AGUYN",
+                "AIRism",
+                "AKUBA",
+                "AKYOO",
+                "ALEGO",
+                "ALIEN SPORTS",
+                "ALIGRO",
+                "ALOHA",
+                "AMANDA",
+                "AMANO",
+                "AMERIAN RAG",
+                "AMERICUS",
+                "AMIRI",
+                "AMIRO",
+                "ANDREW CHRISTIAN",
+                "ANH THO LEATHER",
+                "ANN CHERY",
+                "ANTELO",
+                "ARENO",
+                "ASRV",
+                "ATS",
+                "AVIANO",
+                "Alan Walker",
+                "Alpha",
+                "Alpha Inductries",
+                "Anime Tee",
+                "Anna",
+                "Anthado",
+                "Anvil",
+                "Ariza",
+                "Aromax",
+                "Asala",
+                "AussieBum",
+                "Azado",
+                "acoola",
+                "amberbuddy",
+                "asics",
+                "GABBA",
+                "GABO FASHION",
+                "ECHT",
+                "CANROMA",
+                "DANATEX",
+                "DANCO",
+                "GADINO",
+                "FANTOM",
+                "FASAMY",
+                "FASVIN",
+                "JACK CHAUDE",
+                "JACKIES",
+                "JACQUES BRIT",
+                "EFFBAA",
+                "FEIXIU",
+                "CATSA",
+                "KIGAI",
+                "DEGREY",
+                "JAKO",
+                "CEFFYLO",
+                "GENANX",
+                "GENZ",
+                "JARNO",
+                "JARTAZI",
+                "FINDAKERA",
+                "KAMITO",
+                "BDG",
+                "HANAMA",
+                "FJ",
+                "DESMIIT",
+                "ELNINO",
+                "JERZEES",
+                "HANSCROSS",
+                "EMPOLHAM",
+                "BELLUNI",
+                "BEMINE",
+                "KARUIZAWA SHIRT",
+                "CHELLE",
+                "GIORGIO BEVERLY HILLS",
+                "CHEENY",
+                "DIAVO",
+                "KAVIET",
+                "FORMAN",
+                "GLORIA JEANS",
+                "FORMAT",
+                "IVY moda",
+                "FORTUNE MOUSE",
+                "ERKE",
+                "FOX",
+                "JK CLOTHING",
+                "DIRTY COINS",
+                "GOKING",
+                "JM",
+                "DISCOVERY",
+                "GOLD RHINO",
+                "JOCKVIN",
+                "JONH HENRY",
+                "FRENCHU CONNECTION"
             ],
             "moreSelection": false,
             "nameInput": "brand",
+            "isExtended": true
+        },
+        {
+            "title": "Xuất xứ",
+            "database": [
+                "Băng-la-đét",
+                "Trung Quốc",
+                "Ấn Độ",
+                "Indonesia",
+                "Nhật Bản",
+                "Hàn Quốc",
+                "Đài Loan",
+                "Thái Lan",
+                "Mỹ",
+                "Việt Nam"
+            ],
+            "moreSelection": false,
+            "nameInput": "originPlace",
+            "isExtended": true
+        },
+        {
+            "title": "Chất liệu",
+            "database": [
+                "chinos",
+                "Cotton",
+                "Demin",
+                "Lông vũ",
+                "Nỉ",
+                "Nỉ mỏng",
+                "Lông cừu",
+                "lông",
+                "kaki",
+                "Đan",
+                "Da",
+                "Lanh",
+                "Nylon",
+                "bông",
+                "Sợi tổng hợp",
+                "Sợi dệt",
+                "Len"
+            ],
+            "limitSelection": 5,
+            "moreSelection": true,
+            "nameInput": "originPlace",
+            "isExtended": true
+        },
+        {
+            "title": "Cổ áo",
+            "database": [
+                "Cổ sơ mi",
+                "Cổ tròn",
+                "Cổ lọ",
+                "Cổ chữ V"
+            ],
+            "moreSelection": false,
+            "nameInput": "collar",
+            "isExtended": true
+        },
+        {
+            "title": "Dịp",
+            "database": [
+                "Hằng ngày",
+                "Buổi tiệc",
+                "Công việc"
+            ],
+            "moreSelection": false,
+            "nameInput": "event",
+            "isExtended": true
+        },
+        {
+            "title": "Mẫu",
+            "database": [
+                "Họa tiết",
+                "Sọc caro",
+                "Hoa",
+                "Trơn",
+                "Chấm bi",
+                "In",
+                "Sọc",
+                "Nhuộm"
+            ],
+            "limitSelection": 5,
+            "moreSelection": true,
+            "nameInput": "pattern",
+            "isExtended": true
+        },
+        {
+            "title": "Chiều dài tay áo",
+            "database": [
+                "Dài 3/4",
+                "Dài tay",
+                "Tay ngắn",
+                "Không tay"
+            ],
+            "moreSelection": false,
+            "nameInput": "sleeve",
+            "isExtended": true
+        },
+        {
+            "title": "Phong cách",
+            "database": [
+                "Thể thao",
+                "Cơ bản",
+                "Boho",
+                "Hàn Quốc",
+                "Retro",
+                "Đường phố",
+                "Công sở",
+                "Nhiệt đới"
+            ],
+            "limitSelection": 5,
+            "moreSelection": true,
+            "nameInput": "style",
+            "isExtended": true
+        },
+        {
+            "title": "Kiểu cổ áo",
+            "database": [
+                "Spread Collar",
+                "Pinned Collar",
+                "Mandarin Collar",
+                "Randad Collar",
+                "Club Collar",
+                "Cổ áo truyền thống",
+                "Có nút"
+            ],
+            "moreSelection": false,
+            "nameInput": "sleeveStyle",
+            "isExtended": true
+        },
+        {
+            "title": "Kiểu cổ tay áo",
+            "database": [
+                "Barrell Cuff",
+                "French Cuff"
+            ],
+            "moreSelection": false,
+            "nameInput": "cuffStyle",
+            "isExtended": true
+        },
+        {
+            "title": "Dáng kiểu áo",
+            "database": [
+                "Cổ điển",
+                "Rộng",
+                "Cơ bắp",
+                "Oversized",
+                "Slim",
+                "Ôm sát"
+            ],
+            "moreSelection": false,
+            "nameInput": "shape",
+            "isExtended": true
+        },
+        {
+            "title": "Tall Fit",
+            "database": [
+                "Không",
+                "Có"
+            ],
+            "moreSelection": false,
+            "nameInput": "tallFit",
+            "isExtended": true
+        },
+        {
+            "title": "Rất lớn",
+            "database": [
+                "Không",
+                "Có"
+            ],
+            "moreSelection": false,
+            "nameInput": "large",
             "isExtended": true
         }
     ]
@@ -138,7 +405,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 
 { 
     "title": "Áo hai dây và ba lỗ siêu xịn",
-    "avatar": "https://www.123.com",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/images%2Fpic1.jpg?alt=media&token=e2fff08a-0fef-457a-b403-2a57c4a68afd",
     "video": "",
     "categories": ["Thời Trang Nữ", "Áo", "áo hai dây và ba lỗ"],
     "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",

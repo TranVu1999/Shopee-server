@@ -61,7 +61,7 @@ module.exports = {
       classification,
       description,
       images,
-      listPromotion,
+      listPrice,
       optionalAttributes,
       price,
       unused,
@@ -69,7 +69,8 @@ module.exports = {
     } = req.body;
 
     const showValue = new showText("controllers/product");
-    console.log(showValue(72, accountId));
+    console.log(showValue(72, images));
+    console.log(req.body)
 
     try {
       const account_db = await Account.findById(accountId);
@@ -108,7 +109,7 @@ module.exports = {
         optionalAttributes,
         images,
         price,
-        listPrice: listPromotion,
+        listPrice,
         classification,
         unused,
         sku,
@@ -117,7 +118,7 @@ module.exports = {
       const newProductSaveChange = new ProductSaveChange({
         title: fm_title,
         price,
-        listPrice: listPromotion,
+        listPrice,
         classification,
         modifiedBy: accountId,
       });

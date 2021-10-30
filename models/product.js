@@ -101,6 +101,12 @@ const ProductSchema = new Schema({
       default: 0
   },
 
+  liked: {
+
+    type: Number,
+    default: 0
+  },
+
   status: {
       type: Boolean,
       default: true
