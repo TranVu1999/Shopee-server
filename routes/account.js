@@ -3,12 +3,18 @@ const router = express.Router();
 const verifyToken = require('../middleware/auth');
 const accountController = require('../controllers/account')
 
-// ================= POST ==================
+// ================= GET ==================
 
-// @route POST api/account/short-information
+// @route GET api/account/short-information
 // @desc get short information of account
 // @access Private
 router.get('/short-information', verifyToken, accountController.getShortInformation);
+
+
+// @route GET api/account/full-information
+// @desc get full information of account
+// @access Private
+router.get('/full-information', verifyToken, accountController.getFullInformation);
 
 
 

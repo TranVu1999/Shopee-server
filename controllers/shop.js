@@ -71,8 +71,6 @@ module.exports = {
             images
         } = req.body;
 
-        
-
         try {
 
             let shop_db = await Shop.findOne({account: accountId});

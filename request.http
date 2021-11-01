@@ -47,7 +47,13 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/account/short-information
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJpYXQiOjE2MzA1OTUyOTh9.ctUsv50erpYkOrre7Wm8DPeKc1rqcEhHUA5Fxr7jwDk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+# Get full information
+###
+GET http://localhost:5000/api/account/full-information
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
 
 
 
@@ -104,14 +110,14 @@ GET http://localhost:5000/api/product-category/6152dc2bb1f01e09c0adadf9/skeleton
 
 # Update a product category
 ###
-PUT http://localhost:5000/api/product-category/6155cc042f6a910c786255f5
+PUT http://localhost:5000/api/product-category/6152e5f0da47d63a84e84482
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzMxOTMyNTl9.O6OqmU0l0x9V16hrlj3en5OV94LSlRmb6nVYjPsgpzk
 
 {
     "isTop": true,
     "isRoot": false,
-    "title": "Áo sơ mi",
+    "title": "Váy",
     "skeletonAttribute": [
         {
             "title": "Thương hiệu",
@@ -261,19 +267,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             ],
             "limitSelection": 5,
             "moreSelection": true,
-            "nameInput": "originPlace",
+            "nameInput": "material",
             "isExtended": true
         },
         {
-            "title": "Cổ áo",
+            "title": "Chiều dài quần",
             "database": [
-                "Cổ sơ mi",
-                "Cổ tròn",
-                "Cổ lọ",
-                "Cổ chữ V"
+                "Cắt gấu",
+                "Chiều dài đầy đủ",
+                "Dài 3/4"
             ],
             "moreSelection": false,
-            "nameInput": "collar",
+            "nameInput": "legLength",
             "isExtended": true
         },
         {
@@ -305,18 +310,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "isExtended": true
         },
         {
-            "title": "Chiều dài tay áo",
-            "database": [
-                "Dài 3/4",
-                "Dài tay",
-                "Tay ngắn",
-                "Không tay"
-            ],
-            "moreSelection": false,
-            "nameInput": "sleeve",
-            "isExtended": true
-        },
-        {
             "title": "Phong cách",
             "database": [
                 "Thể thao",
@@ -334,55 +327,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "isExtended": true
         },
         {
-            "title": "Kiểu cổ áo",
-            "database": [
-                "Spread Collar",
-                "Pinned Collar",
-                "Mandarin Collar",
-                "Randad Collar",
-                "Club Collar",
-                "Cổ áo truyền thống",
-                "Có nút"
-            ],
-            "moreSelection": false,
-            "nameInput": "sleeveStyle",
-            "isExtended": true
-        },
-        {
-            "title": "Kiểu cổ tay áo",
-            "database": [
-                "Barrell Cuff",
-                "French Cuff"
-            ],
-            "moreSelection": false,
-            "nameInput": "cuffStyle",
-            "isExtended": true
-        },
-        {
-            "title": "Dáng kiểu áo",
-            "database": [
-                "Cổ điển",
-                "Rộng",
-                "Cơ bắp",
-                "Oversized",
-                "Slim",
-                "Ôm sát"
-            ],
-            "moreSelection": false,
-            "nameInput": "shape",
-            "isExtended": true
-        },
-        {
-            "title": "Tall Fit",
-            "database": [
-                "Không",
-                "Có"
-            ],
-            "moreSelection": false,
-            "nameInput": "tallFit",
-            "isExtended": true
-        },
-        {
             "title": "Rất lớn",
             "database": [
                 "Không",
@@ -390,6 +334,65 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             ],
             "moreSelection": false,
             "nameInput": "large",
+            "isExtended": true
+        },
+        {
+            "title": "Chiều dài váy",
+            "database": [
+                "Maxi",
+                "Midi",
+                "Mini"
+            ],
+            "moreSelection": false,
+            "nameInput": "dressLenght",
+            "isExtended": true
+        },
+        {
+            "title": "Kiểu váy",
+            "database": [
+                "Váy chữ A",
+                "Váy ôm sát",
+                "Váy đuôi cá dài",
+                "Váy xòe",
+                "Váy bút chì",
+                "Váy xếp ly",
+                "Váy quấn"
+            ],
+            "moreSelection": false,
+            "nameInput": "dressStyle",
+            "isExtended": true
+        },
+        {
+            "title": "Bản eo",
+            "database": [
+                "Bản to",
+                "Bản thấp",
+                "Giữa eo"
+            ],
+            "moreSelection": false,
+            "nameInput": "waist",
+            "isExtended": true
+        },
+        {
+            "title": "Mùa",
+            "database": [
+                "Mùa đông",
+                "Mùa hè",
+                "Mùa xuân",
+                "Mùa thu"
+            ],
+            "moreSelection": false,
+            "nameInput": "season",
+            "isExtended": true
+        },
+        {
+            "title": "Petite",
+            "database": [
+                "Có",
+                "Không"
+            ],
+            "moreSelection": false,
+            "nameInput": "petite",
             "isExtended": true
         }
     ]

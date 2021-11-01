@@ -105,56 +105,109 @@ module.exports = {
             socialToken,
             role
         } = req.body
-        
-
-        // console.log({socialToken})
-        // console.log(jwt_decode(socialToken));
 
         try {
-            if(!Validate.checkRequireFieldString(userLogin, password, role)){
+            let account = null;
+
+            if(socialToken) {
+                const {name, picture, email} = jwt_decode(socialToken);
+                const filter = {userLogin: email, role};
+                account = await Account.findOne(filter);
+
+                if(!account) {
+                    const newAccount = new Account({
+                        userLogin: email,
+                        password: "",
+                        role
+                    });
+        
+                    const newUser = new User({
+                        avatar: picture,
+                        username: email.slice(0, email.indexOf("@")),
+                        fullName: name,
+                        phoneNumber: "",
+                        email: email,
+                        account: newAccount._id
+                    });
+        
+                    newAccount.user = newUser._id;
+
+                    const newShop = new Shop({
+                        account: newAccount._id
+                    })
+
+                    await Promise.all([
+                        newAccount.save(), 
+                        newUser.save(), 
+                        newShop.save()
+                    ]);
+
+                    const accessToken = jwt.sign({
+                        accountId: newAccount._id, role
+                    }, process.env.ACCESS_TOKEN_SECRET);
+
+                    return res.json({
+                        success: true, 
+                        message: "User logged successfully", 
+                        accessToken
+                    });
+                }
+
+                const accessToken = jwt.sign({
+                    accountId: account._id, role
+                }, process.env.ACCESS_TOKEN_SECRET);
+    
+    
+                return res.json({
+                    success: true, 
+                    message: "User logged successfully", 
+                    accessToken
+                });
+
+            } else if(!Validate.checkRequireFieldString(userLogin, password, role)) {
                 return res
                 .json({success: false, message: "Thiếu thông tin đăng nhập"})
-            }          
+            }
 
-            let account = null;
             const filter = {userLogin, role}
-            account = await Account.findOne(filter);
-            if(!account){
-                return res
-                .json({
-                    success: false, 
-                    message: "Không tìm thấy tài khoản này."
-                })
-            }
-
-            const passwordValid = bcrypt.compareSync(password, account.password);
-            if(!passwordValid){
-                return res
-                .json({success: false, message: "Sai thông tin tài khoản/mật khẩu"})
-            }
-
-            if(role === "owner"){
-                const shop_db = await Shop.findOne({account: account._id});
-                if(!shop_db){
-                    const newShop = new Shop({
-                        account: account._id
-                    });
-
-                    await newShop.save();
-                    console.log("created new shop");
+                account = await Account.findOne(filter);
+                if(!account){
+                    return res
+                    .json({
+                        success: false, 
+                        message: "Không tìm thấy tài khoản này."
+                    })
                 }
-            }
+    
+                const passwordValid = bcrypt.compareSync(password, account.password);
+                if(!passwordValid){
+                    return res
+                    .json({success: false, message: "Sai thông tin tài khoản/mật khẩu"})
+                }
+    
+                if(role === "owner"){
+                    const shop_db = await Shop.findOne({account: account._id});
+                    if(!shop_db){
+                        const newShop = new Shop({
+                            account: account._id
+                        });
+    
+                        await newShop.save();
+                        console.log("created new shop");
+                    }
+                }
+                
+                const accessToken = jwt.sign({
+                    accountId: account._id, role
+                }, process.env.ACCESS_TOKEN_SECRET);
+    
+    
+                return res.json({
+                    success: true, 
+                    message: "User logged successfully", 
+                    accessToken
+                });
             
-            const accessToken = jwt.sign({
-                accountId: account._id, role
-            }, process.env.ACCESS_TOKEN_SECRET);
-
-
-            return res.json({
-                success: true, 
-                message: "User logged successfully", 
-                accessToken
-            })
 
         } catch (error) {
             console.log(error)
