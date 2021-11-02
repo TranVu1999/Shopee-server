@@ -91,4 +91,77 @@ module.exports = {
             })
         }
     },
+
+    /**
+     * Get short information of account
+    */
+    updateInformation: async function(req, res){       
+        const {accountId} = req;
+        const {id} = req.params;
+        const {
+            avatar,
+            fullName,
+            brand,
+            gender,
+            birthday
+        } = req.body;
+
+        try {
+            if(accountId === id) {
+                const filter = {account: accountId};
+                const newUserData = { 
+                    avatar,
+                    fullName,
+                    gender,
+                    birthday
+                }
+                const newShopData = {
+                    brand,
+                    account: accountId
+                }
+                const optionUpdate = {new: true, upsert: true}
+
+                const updateDatas = await Promise.all([
+                    User.findOneAndUpdate( filter, newUserData, optionUpdate ),
+                    Shop.findOneAndUpdate( filter, newShopData, optionUpdate)
+                ]);
+
+                console.log({updateDatas})
+
+                const resDataUpdate = {
+                    avatar: updateDatas[0].avatar,
+                    username: updateDatas[0].username,
+                    fullName: updateDatas[0].fullName,
+                    phoneNumber: updateDatas[0].phoneNumber,
+                    email: updateDatas[0].email,
+                    gender: updateDatas[0].gender,
+                    birthday: updateDatas[0].birthday,
+                    brand: updateDatas[1].brand
+                }
+
+                
+
+                return res.json({
+                    success: true,
+                    message: "You can get this data",
+                    user: resDataUpdate
+                });
+            }
+
+            return res.json({
+                success: true,
+                message: "Bạn không thể thực hiện thao tác này"
+            });
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            })
+        }
+    },
+
 }

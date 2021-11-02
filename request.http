@@ -55,6 +55,20 @@ GET http://localhost:5000/api/account/full-information
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
 
+# Update account information
+###
+PUT http://localhost:5000/api/account/617ea14e217de1261caac082
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+{
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/avatars%2Fcode.png?alt=media&token=0eec40e0-97ec-42ea-917b-4d227141cf90",
+    "fullName": "Trần Lê Anh Vũ",
+    "gender": "other",
+    "birthday": "2021-10-31T13:59:14.247Z",
+    "brand": "Clothes Shop"
+}
+
 
 
 // ================== SHOP ==================

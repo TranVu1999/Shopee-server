@@ -17,6 +17,14 @@ router.get('/short-information', verifyToken, accountController.getShortInformat
 router.get('/full-information', verifyToken, accountController.getFullInformation);
 
 
+// ================= PUT ==================
+
+// @route PUT api/account/id
+// @desc get short information of account
+// @access Private
+router.put('/:id', verifyToken, accountController.updateInformation);
+
+
 
 
 module.exports = router;
