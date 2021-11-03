@@ -70,6 +70,30 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 }
 
 
+// ================== Address ==================
+# Post new address
+###
+POST http://localhost:5000/api/address
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+{
+    "fullname": "Trần Lê Anh Vũ",
+    "phoneNumber": "0377670509",
+    "houseNumber": "01, Võ Văn Ngân",
+    "ward": "Bình Thọ",
+    "district": "Thủ Đức",
+    "province": "TP. Hồ Chí Minh",
+    "isDefault": true,
+    "isDeliveryAddress": true,
+    "isReceivedAddress": true
+}
+
+# GEt list address
+###
+GET http://localhost:5000/api/address
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
 
 // ================== SHOP ==================
 # Get shop information

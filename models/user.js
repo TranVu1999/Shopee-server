@@ -40,7 +40,9 @@ const UserSchema = new Schema({
     account: {
         type: Schema.Types.ObjectId,
         ref: "Account"
-    }
+    },
+
+    
 });
 
 module.exports = mongoose.model("User", UserSchema)
