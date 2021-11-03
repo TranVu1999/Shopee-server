@@ -10,6 +10,11 @@ const addressController = require('../controllers/address')
 // @access Private
 router.post('', verifyToken, addressController.add);
 
+// @route POST api/address
+// @desc add new address
+// @access Private
+router.post('/database', verifyToken, addressController.address);
+
 
 // ================= GET ==================
 
@@ -17,6 +22,14 @@ router.post('', verifyToken, addressController.add);
 // @desc get list address
 // @access Private
 router.get('', verifyToken, addressController.get);
+
+
+// ================= DELETE ==================
+
+// @route DELETE api/address
+// @desc remove address
+// @access Private
+router.delete('/:id', verifyToken, addressController.remove);
 
 
 

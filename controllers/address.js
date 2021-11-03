@@ -1,6 +1,9 @@
 // Models
 const Account = require("./../models/account");
-const Address = require("./../models/address")
+const Address = require("./../models/address");
+const Province = require("./../models/province");
+const District = require("./../models/district");
+const Ward = require("./../models/ward");
 
 
 module.exports = {
@@ -76,6 +79,63 @@ module.exports = {
     },
 
     /**
+     * Create new address
+    */
+    address: async function(req, res){        
+        const {accountId} = req;
+        const {
+            province, district, ward
+        } = req.body;
+
+        try {
+            let promises = []
+            province.forEach(prov => {
+                const newProvince = new Province({
+                    name: prov.name,
+                    code: prov.code
+                });
+                promises.push(newProvince.save());
+            });
+            
+            
+            district.forEach(async (dis) => {
+                const newDistrict = new District({
+                    name: dis.name,
+                    code: dis.code,
+                    provinceCode: dis.provinceCode
+                });
+                promises.push(newDistrict.save());
+            })
+            ward.forEach(async (war) => {
+                const newWard = new Ward({
+                    name: war.name,
+                    code: war.code,
+                    districtCode: war.districtCode
+                });
+                promises.push(newWard.save());
+            });
+
+            await Promise.all(promises);
+
+            return res
+            .json({
+                success: true,
+                message: "Thêm địa chỉ thành công"
+            });
+
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            });
+        }
+    },
+
+    /**
      * Get list address
     */
     get: async function(req, res){        
@@ -102,6 +162,40 @@ module.exports = {
                 success: true,
                 message: "Bạn có thể lấy dữ liệu này",
                 listAddress: listAddress_db
+            });
+
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            });
+        }
+    },
+
+    /**
+    * Remove address
+    */
+    remove: async function(req, res){        
+        const {accountId} = req;
+        const addressId = req.params.id;        
+
+        try {
+            
+            const addressRemove = await Address.findOneAndRemove({
+                account: accountId,
+                _id: addressId,
+                isDefault: false
+            })
+
+            return res
+            .json({
+                success: true,
+                message: "Đã xóa thành công",
+                address: addressRemove
             });
 
 

@@ -80,20 +80,209 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 {
     "fullname": "Trần Lê Anh Vũ",
     "phoneNumber": "0377670509",
-    "houseNumber": "01, Võ Văn Ngân",
-    "ward": "Bình Thọ",
-    "district": "Thủ Đức",
+    "houseNumber": "156A, Đường Lã Xuân Oai",
+    "ward": "Tăng Nhơn Phú A",
+    "district": "Quận 9",
     "province": "TP. Hồ Chí Minh",
-    "isDefault": true,
-    "isDeliveryAddress": true,
+    "isDefault": false,
+    "isDeliveryAddress": false,
     "isReceivedAddress": true
 }
+
+# Link data: http://qcvn109.gov.vn/dvhc/XSLT_Tree/dvhc_data.xml
+# Post new address
+###
+POST http://localhost:5000/api/address/database
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+{
+    "province": [
+        {
+            "name": "Thành Phố Hà Nội",
+            "code": "01"
+        },
+        {
+            "name": "Tỉnh Quảng Ngãi",
+            "code": "51"
+        },
+        {
+            "name": "Thành Phố Hồ Chí Minh",
+            "code": "79"
+        }
+    ],
+    "district": [
+        {
+            "name": "Quận Ba Đình",
+            "code": "001",
+            "provinceCode": "01"
+        },
+        {
+            "name": "Quận Hoàn Kiếm",
+            "code": "002",
+            "provinceCode": "01"
+        },
+        {
+            "name": "Quận Tây Hồ",
+            "code": "003",
+            "provinceCode": "01"
+        }
+
+        ,
+        {
+            "name": "Thành Phố Quảng Ngãi",
+            "code": "522",
+            "provinceCode": "51"
+        },
+        {
+            "name": "Huyện Bình Sơn",
+            "code": "524",
+            "provinceCode": "51"
+        },
+        {
+            "name": "Huyện Đức Phổ",
+            "code": "534",
+            "provinceCode": "51"
+        }
+
+        ,
+        {
+            "name": "Quận Thủ Đức",
+            "code": "762",
+            "provinceCode": "79"
+        },
+        {
+            "name": "Quận 9",
+            "code": "763",
+            "provinceCode": "79"
+        }
+    ],
+    "ward": [
+        {
+            "name": "Phường Phúc Xá",
+            "code": "00001",
+            "districtCode": "001"
+        },
+        {
+            "name": "Phường Trúc Bạch",
+            "code": "00004",
+            "districtCode": "001"
+        },
+        {
+            "name": "Phường Vĩnh Phúc",
+            "code": "00006",
+            "districtCode": "001"
+        },
+
+
+        {
+            "name": "Phường Phúc Tân",
+            "code": "00037",
+            "districtCode": "002"
+        },
+        {
+            "name": "Phường Đồng Xuân",
+            "code": "00040",
+            "districtCode": "002"
+        },
+
+
+        {
+            "name": "Phường Phú Thượng",
+            "code": "00091",
+            "districtCode": "003"
+        },
+        {
+            "name": "Phường Nhật Tân",
+            "code": "00094",
+            "districtCode": "003"
+        }
+
+
+
+        ,
+        {
+            "name": "Phường Lê Hồng Phong",
+            "code": "21010",
+            "districtCode": "522"
+        },
+        {
+            "name": "Phường Trần Phú",
+            "code": "21013",
+            "districtCode": "522"
+        }
+
+
+        ,
+        {
+            "name": "Trị Trấn Châu Ổ",
+            "code": "21040",
+            "districtCode": "524"
+        },
+        {
+            "name": "Xã Bình Thuận",
+            "code": "21043",
+            "districtCode": "524"
+        }
+
+
+        ,
+        {
+            "name": "Thị Trấn Đức Phổ",
+            "code": "21439",
+            "districtCode": "534"
+        },
+        {
+            "name": "Xã Phổ Hòa",
+            "code": "21469",
+            "districtCode": "534"
+        }
+
+
+
+        ,
+        {
+            "name": "Phường Linh Xuân",
+            "code": "26794",
+            "districtCode": "762"
+        },
+        {
+            "name": "Phường Bình Chiểu",
+            "code": "26797",
+            "districtCode": "762"
+        }
+
+
+
+        ,
+        {
+            "name": "Phường Long Bình",
+            "code": "26830",
+            "districtCode": "763"
+        },
+        {
+            "name": "Phường Tăng Nhơn Phú A",
+            "code": "26842",
+            "districtCode": "763"
+        }
+    ]
+}
+
+
 
 # GEt list address
 ###
 GET http://localhost:5000/api/address
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+# Remove Address
+###
+DELETE http://localhost:5000/api/address/61824ab2972c1b029c5d0540
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+
 
 // ================== SHOP ==================
 # Get shop information
