@@ -1,7 +1,7 @@
 const nodemailer =  require('nodemailer');
 
 module.exports = {
-    sendMail: function() {
+    sendVerifyCode: async function(to, subject, content) {
         var transporter =  nodemailer.createTransport({ 
             host: 'smtp.gmail.com',
             port: 465,
@@ -14,21 +14,13 @@ module.exports = {
                 rejectUnauthorized: false
             }
         });
-        var content = '';
-        content += `
-            <div style="padding: 10px; background-color: #003375">
-                <div style="padding: 10px; background-color: white;">
-                    <h4 style="color: #0085ff">Gửi mail với nodemailer và express</h4>
-                    <span style="color: black">Đây là mail test</span>
-                </div>
-            </div>
-        `;
-        var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
+
+        var mainOptions = { 
             from: 'tranleanhvu001@gmail.com',
-            to: "tranleanhvu002@gmail.com",
-            subject: 'Test Nodemailer',
+            to,
+            subject,
             text: 'Your text is here',
-            html: content //Nội dung html mình đã tạo trên kia :))
+            html: content 
         }
         transporter.sendMail(mainOptions, function(err, info){
             if (err) {

@@ -13,7 +13,17 @@ router.get('/short-information', verifyToken, accountController.getShortInformat
 // @route GET api/account/short-information
 // @desc get short information of account
 // @access Private
-router.get('/send-mailer', verifyToken, accountController.sendMailer);
+// router.get('/send-mailer', verifyToken, accountController.sendMailer);
+
+// @route GET api/account/password
+// @desc get password
+// @access Private
+router.get('/password', verifyToken, accountController.getPassword);
+
+// @route GET api/account/password/send-verify-code
+// @desc get verify code
+// @access Private
+router.get('/password/send-verify-code', verifyToken, accountController.sendVerifyCode);
 
 
 // @route GET api/account/full-information
