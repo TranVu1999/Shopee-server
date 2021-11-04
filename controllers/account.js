@@ -3,7 +3,11 @@ const Account = require("./../models/account");
 const User = require("./../models/user");
 const Shop = require("./../models/shop");
 
+// Modules
+const Mailer = require("./../utils/mailer");
+
 module.exports = {
+    
     /**
      * Get short information of account
     */
@@ -148,6 +152,30 @@ module.exports = {
                 });
             }
 
+            return res.json({
+                success: true,
+                message: "Bạn không thể thực hiện thao tác này"
+            });
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            })
+        }
+    },
+
+    /**
+     * Get short information of account
+    */
+    sendMailer: async function(req, res){     
+
+
+        try {
+            Mailer.sendMail();
             return res.json({
                 success: true,
                 message: "Bạn không thể thực hiện thao tác này"

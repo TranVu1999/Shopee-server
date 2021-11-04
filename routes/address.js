@@ -33,5 +33,14 @@ router.delete('/:id', verifyToken, addressController.remove);
 
 
 
+// ================= PUT ==================
+
+// @route PUT api/address/:id
+// @desc remove address
+// @access Private
+router.put('/:id', verifyToken, addressController.edit);
+
+
+
 
 module.exports = router;

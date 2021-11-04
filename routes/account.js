@@ -10,6 +10,11 @@ const accountController = require('../controllers/account')
 // @access Private
 router.get('/short-information', verifyToken, accountController.getShortInformation);
 
+// @route GET api/account/short-information
+// @desc get short information of account
+// @access Private
+router.get('/send-mailer', verifyToken, accountController.sendMailer);
+
 
 // @route GET api/account/full-information
 // @desc get full information of account

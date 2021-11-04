@@ -79,6 +79,82 @@ module.exports = {
     },
 
     /**
+     * Edit address
+    */
+    edit: async function(req, res){        
+        const {accountId} = req;
+        const addressId = req.params.id;
+        const {
+            phoneNumber,
+            fullname,
+            houseNumber, 
+            district,
+            ward,
+            province,
+            isDeliveryAddress,
+            isDefault,
+            isReceivedAddress
+        } = req.body;
+
+        try {
+
+            if(isDefault) {
+                await Address.findOneAndUpdate({
+                    account: accountId,
+                    isDefault: true
+                }, {isDefault: false});
+            }
+            
+            const filter = {
+                account: accountId,
+                _id: addressId
+            };
+
+            const update = {
+                phoneNumber,
+                fullname,
+                houseNumber, 
+                district,
+                ward,
+                province,
+                isDeliveryAddress,
+                isDefault,
+                isReceivedAddress,
+                account: accountId
+            }
+
+            const updateAddress = await Address.findOneAndUpdate(
+                filter, update, {new: true});
+
+            if(updateAddress) {
+                return res
+                .json({
+                    success: true,
+                    message: "Chỉnh sửa địa chỉ thành công",
+                    address: updateAddress
+                });
+            }
+
+            return res
+            .status(400)
+            .json({
+                success: false,
+                message: "Chỉnh sửa địa chỉ không thành công"
+            });
+
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            });
+        }
+    },
+
+    /**
      * Create new address
     */
     address: async function(req, res){        

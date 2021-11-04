@@ -55,6 +55,13 @@ GET http://localhost:5000/api/account/full-information
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
 
+
+# Send mailer
+###
+GET http://localhost:5000/api/account/send-mailer
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
 # Update account information
 ###
 PUT http://localhost:5000/api/account/617ea14e217de1261caac082
@@ -101,6 +108,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 DELETE http://localhost:5000/api/address/61824ab2972c1b029c5d0540
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+
+# Edit new address
+###
+PUT http://localhost:5000/api/address/61824b01972c1b029c5d0544
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+{
+    "fullname": "Trần Lê Anh Vũ123",
+    "phoneNumber": "0377670509",
+    "houseNumber": "156A, Đường Lã Xuân Oai",
+    "ward": "Tăng Nhơn Phú A",
+    "district": "Quận 9",
+    "province": "TP. Hồ Chí Minh",
+    "isDefault": true,
+    "isDeliveryAddress": false,
+    "isReceivedAddress": true
+}
 
 
 // ================== ADMINISTRATIVE UNIT ==================
