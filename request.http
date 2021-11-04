@@ -84,11 +84,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     "ward": "Tăng Nhơn Phú A",
     "district": "Quận 9",
     "province": "TP. Hồ Chí Minh",
-    "isDefault": false,
+    "isDefault": true,
     "isDeliveryAddress": false,
     "isReceivedAddress": true
 }
 
+
+# GEt list address
+###
+GET http://localhost:5000/api/address
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+# Remove Address
+###
+DELETE http://localhost:5000/api/address/61824ab2972c1b029c5d0540
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
+
+
+// ================== ADMINISTRATIVE UNIT ==================
 # Link data: http://qcvn109.gov.vn/dvhc/XSLT_Tree/dvhc_data.xml
 # Post new address
 ###
@@ -268,20 +283,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     ]
 }
 
-
-
-# GEt list address
+# Get all province
 ###
-GET http://localhost:5000/api/address
+GET http://localhost:5000/api/administrative-unit/province
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
 
-# Remove Address
+
+# Get list district
 ###
-DELETE http://localhost:5000/api/address/61824ab2972c1b029c5d0540
+GET http://localhost:5000/api/administrative-unit/district/51
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTdlYTE0ZTIxN2RlMTI2MWNhYWMwODIiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNTY4ODc4M30.39nM_-aFjUmM-Q0Bju7u3jzjQeG4HAW58zBz5AvgLA4
 
+
+# Get list district
+###
+GET http://localhost:5000/api/administrative-unit/ward/534
+Content-Type: application/json
 
 
 // ================== SHOP ==================
