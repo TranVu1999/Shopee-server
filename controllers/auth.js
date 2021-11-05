@@ -18,8 +18,6 @@ module.exports = {
         const {
             userLogin, password, role
         } = req.body;
-
-        console.log()
         
 
         try {

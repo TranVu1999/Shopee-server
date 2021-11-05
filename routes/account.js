@@ -34,6 +34,13 @@ router.get('/full-information', verifyToken, accountController.getFullInformatio
 
 // ================= PUT ==================
 
+// @route PUT api/account/password
+// @desc update password
+// @access Private
+router.put('/password', verifyToken, accountController.updatePassword);
+
+
+
 // @route PUT api/account/id
 // @desc get short information of account
 // @access Private

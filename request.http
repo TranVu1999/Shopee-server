@@ -90,6 +90,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     "brand": "Clothes Shop"
 }
 
+# Update password
+###
+PUT http://localhost:5000/api/account/password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNjA0NzUzOX0.7jBR-L7OFk2BoCS5uU7CC0QAEni4RLz79RGrv6ls-JA
+
+{
+    "newPassword": "TranLeAnhVu1999",
+    "type": "add",
+    "oldPassword": ""
+}
+
 
 // ================== Address ==================
 # Post new address

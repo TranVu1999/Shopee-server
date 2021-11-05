@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt-nodejs');
+
 // Models
 const Account = require("./../models/account");
 const User = require("./../models/user");
@@ -66,6 +68,8 @@ module.exports = {
                     message: "Bạn không thể lấy thông tin của tài khoản này"
                 })
             }
+
+            console.log({account_db})
 
             return res.json({
                 success: true,
@@ -245,7 +249,64 @@ module.exports = {
             }
 
             return res.json({
-                success: true,
+                success: false,
+                message: "Bạn không thể thực hiện thao tác này"
+            });
+
+        } catch (error) {
+            console.log(error)
+            return res
+            .status(500)
+            .json({
+                success: false,
+                message: "Internal server error"
+            })
+        }
+    },
+
+    /**
+     * Get short information of account
+    */
+     updatePassword: async function(req, res){       
+        const {accountId} = req;
+        const {
+            newPassword,
+            type,
+            oldPassword
+        } = req.body;
+
+        try {
+            let updateAccount = null;
+            var salt = bcrypt.genSaltSync(10);
+            const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+            if(type === "add") {
+                updateAccount = await Account.findOneAndUpdate(
+                    {_id: accountId},
+                    {password: hashedPassword},
+                    {new: true}
+                )
+            } else if (type === "update") {
+                const hashedOldPassword = bcrypt.hashSync(oldPassword, salt);
+
+                updateAccount = await Account.findOneAndUpdate(
+                    {_id: accountId, password: hashedOldPassword},
+                    {password: hashedPassword},
+                    {new: true}
+                )
+            }
+
+            console.log({updateAccount})
+
+            if(updateAccount) {
+                return res.json({
+                    success: true,
+                    message: "Mật khẩu của bạn đã được cập nhật!"
+                });
+            }
+
+            return res.json({
+                success: false,
                 message: "Bạn không thể thực hiện thao tác này"
             });
 
