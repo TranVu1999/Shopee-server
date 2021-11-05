@@ -68,27 +68,24 @@ module.exports = {
       sku,
     } = req.body;
 
-    const showValue = new showText("controllers/product");
-    console.log(showValue(72, images));
-    console.log(req.body)
-
     try {
       const account_db = await Account.findById(accountId);
-
+      console.log({account_db})
       if (!account_db && (role === "owner" || role === "admin")) {
         return res.status(400).json({
           success: false,
           message: "Bạn không có quyền thực hiện thao tác này.",
         });
       }
+      
 
-      const isAccept = await validateProductInformation(
-        title,
-        avatar,
-        categories,
-        description,
-        price
-      );
+      // const isAccept = await validateProductInformation(
+      //   title,
+      //   avatar,
+      //   categories,
+      //   description,
+      //   price
+      // );
 
       if (isAccept) {
         return res.status(400).json({
@@ -124,6 +121,7 @@ module.exports = {
       });
 
       await Promise.all([newProduct.save(), newProductSaveChange.save()]);
+      
 
       return res.json({
         success: true,

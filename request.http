@@ -406,15 +406,16 @@ GET http://localhost:5000/api/product-category/6152dc2bb1f01e09c0adadf9/skeleton
 
 # Update a product category
 ###
-PUT http://localhost:5000/api/product-category/6152e5f0da47d63a84e84482
+PUT http://localhost:5000/api/product-category/6155cc042f6a910c786255f8
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTU4OGJiMTQyZTZlZTJkNDBiZjc0MzkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzMxOTMyNTl9.O6OqmU0l0x9V16hrlj3en5OV94LSlRmb6nVYjPsgpzk
 
 {
     "isTop": true,
     "isRoot": false,
-    "title": "Váy",
+    "title": "Áo thun",
     "skeletonAttribute": [
+        // Thương hiệu
         {
             "title": "Thương hiệu",
             "database": [
@@ -522,6 +523,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "nameInput": "brand",
             "isExtended": true
         },
+        // Xuất xứ
         {
             "title": "Xuất xứ",
             "database": [
@@ -540,6 +542,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "nameInput": "originPlace",
             "isExtended": true
         },
+        // Chất liệu
         {
             "title": "Chất liệu",
             "database": [
@@ -566,28 +569,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "nameInput": "material",
             "isExtended": true
         },
-        {
-            "title": "Chiều dài quần",
-            "database": [
-                "Cắt gấu",
-                "Chiều dài đầy đủ",
-                "Dài 3/4"
-            ],
-            "moreSelection": false,
-            "nameInput": "legLength",
-            "isExtended": true
-        },
-        {
-            "title": "Dịp",
-            "database": [
-                "Hằng ngày",
-                "Buổi tiệc",
-                "Công việc"
-            ],
-            "moreSelection": false,
-            "nameInput": "event",
-            "isExtended": true
-        },
+        // Mẫu
         {
             "title": "Mẫu",
             "database": [
@@ -605,6 +587,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "nameInput": "pattern",
             "isExtended": true
         },
+        // Phong cách
         {
             "title": "Phong cách",
             "database": [
@@ -622,6 +605,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "nameInput": "style",
             "isExtended": true
         },
+        // Rất lớn
         {
             "title": "Rất lớn",
             "database": [
@@ -631,44 +615,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "moreSelection": false,
             "nameInput": "large",
             "isExtended": true
-        },
-        {
-            "title": "Chiều dài váy",
-            "database": [
-                "Maxi",
-                "Midi",
-                "Mini"
-            ],
-            "moreSelection": false,
-            "nameInput": "dressLenght",
-            "isExtended": true
-        },
-        {
-            "title": "Kiểu váy",
-            "database": [
-                "Váy chữ A",
-                "Váy ôm sát",
-                "Váy đuôi cá dài",
-                "Váy xòe",
-                "Váy bút chì",
-                "Váy xếp ly",
-                "Váy quấn"
-            ],
-            "moreSelection": false,
-            "nameInput": "dressStyle",
-            "isExtended": true
-        },
-        {
-            "title": "Bản eo",
-            "database": [
-                "Bản to",
-                "Bản thấp",
-                "Giữa eo"
-            ],
-            "moreSelection": false,
-            "nameInput": "waist",
-            "isExtended": true
-        },
+        }, 
+        // Mùa
         {
             "title": "Mùa",
             "database": [
@@ -681,14 +629,56 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
             "nameInput": "season",
             "isExtended": true
         },
+        // Chiều dài tay áo
         {
-            "title": "Petite",
+            "title": "Chiều dài tay áo",
             "database": [
-                "Có",
-                "Không"
+                "Dài 3/4",
+                "Dài tay",
+                "Tay ngắn",
+                "Không tay"
             ],
             "moreSelection": false,
-            "nameInput": "petite",
+            "nameInput": "sleeve",
+            "isExtended": true
+        },
+        // Dáng kiểu áo
+        {
+            "title": "Dáng kiểu áo",
+            "database": [
+                "Cổ điển",
+                "Rộng",
+                "Cơ bắp",
+                "Oversized",
+                "Slim",
+                "Ôm sát"
+            ],
+            "moreSelection": false,
+            "nameInput": "shape",
+            "isExtended": true
+        },
+        // Tall fit
+        {
+            "title": "Tall Fit",
+            "database": [
+                "Không",
+                "Có"
+            ],
+            "moreSelection": false,
+            "nameInput": "tallFit",
+            "isExtended": true
+        },
+        // Cổ áo
+        {
+            "title": "Cổ áo",
+            "database": [
+                "Cổ sơ mi",
+                "Cổ tròn",
+                "Cổ lọ",
+                "Cổ chữ V"
+            ],
+            "moreSelection": false,
+            "nameInput": "collar",
             "isExtended": true
         }
     ]
@@ -703,64 +693,30 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTcxN2FmZmFiNWIyNjNhMmMzMjI0MjIiLCJpYXQiOjE2MzQ4MjcwMDh9.J9oJEdszovhTvlx1H-18OVp27g15_y4KWfIG8jcPfrE
 
 { 
-    "title": "Áo hai dây và ba lỗ siêu xịn",
-    "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/images%2Fpic1.jpg?alt=media&token=e2fff08a-0fef-457a-b403-2a57c4a68afd",
-    "video": "",
-    "categories": ["Thời Trang Nữ", "Áo", "áo hai dây và ba lỗ"],
-    "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/products%2F37d2acf0dbe662ef51fd81c1f2bdc345.jpg?alt=media&token=d8e358ec-fb8b-469c-a97f-78ae8e5918e1",
+    "categories": ["Thời Trang Nam", "Áo", "Áo thun"],
+    "classification": {},
+    "description": "👍Bảo hành 7 ngày đổi trả miễn phí khi sản phẩm không đúng size mẫu\n⛑️Có thể kết hợp nhiều loại trang phục mang lại phong cách cá tính riêng\n🖐 Có 4 Size Các Bạn Lựa Chọn Từ 43-76kg Luôn\n\nSize M.   :  Cao 1m5-> 1m63 ~ cân nặng 44-54kg\n   |—-> Chiều Ngang Áo Size M: 48-48.5cm. Dài 68cm\nSize L.    :  Cao 1m6-> 1m67  ~ cân nặng 55-65kg\n   |—-> Chiều Ngang Áo Size L: 50-50.5cm .  Dài 70cm \nSize Xl.   :  Cao 1m65-> 1m72 ~ cân nặng 65-72kg\n   |—-> Chiều Ngang Áo síz XL:51.5-52cm .  Dài 72cm \nSize XXL:   Cao m7-> 1m77 ~ Cân nặng 70kg-76kg\n   |—-> Chiều Ngang Áo Size XXL :53.5-54cm. Dài 74cm\n❤Lưu Ý: Màu Đỏ Đô , Xanh Đen Các Anh Chị Gặt Riêng Giúp E 2-3 Nước Đầu Để An Toàn Ạ , Đừng Giặt Chun Với Áo Trắng Nhé!!\n \nÁo thun Nam Hàng Shop Jarmon Group Vải  Côtton🕶 \nGiá Sản Xuất Tận Xưởng . \nKhách Quan Tâm Có Thể Liên Hệ Xưởng Áo TENJI STORE Nhé\n\nÁo Thun Nam Có Cổ sở hữu 17 màu sắc phù hợp với mọi độ tuổi, mọi sở thích và luôn bắt kịp xu thế.\n\nNay chúng tôi thêm vào bộ sưu tập 4 màu mới Cực Hot 2021 Phối Viền, được chăm chút từ việc chọn màu, chất liệu đến đường may, đảm bảo sẽ làm hài lòng dù khách hàng khó tính nhất.\n\n🔸 Chất liệu:vải cotton , mịn mát, không RÚT!\n🔸 Co giãn 4 chiều giúp bạn thoải mái hoạt động\n🔸 5 size: , M, L, XL, XXL từ -kg\n👉 Nếu vẫn chưa biết chọn size, màu thì bạn chỉ cần để lại (.) hoặc #inbox, nhân viên sẽ liên hệ tư vấn ngay cho bạn.\n=======",
     "images": [],
-    "price": 150000,
-    "unused": true,
-    "sku": "A2D3L",
+    "inventory": 50,
+    "listPrice": [],
     "optionalAttributes": {
-        "brand": "AAA JEANS",
-        "croppedTop": "Có",
+        "brand": "ADAM STORE",
+        "collar": "Cổ chữ V",
         "large": "Có",
-        "length": "",
-        "material": ["Voans", "chinos", "Cotton", "Lông vũ", "Nỉ"],
+        "material": ["Cotton"],
         "originPlace": "Việt Nam",
-        "patern": [],
-        "petite": "Có",
-        "season": "Mùa đông",
-        "style": ["Thể thao", "Cơ bản", "Boho", "Hàn Quốc"]
+        "pattern": ["Trơn"],
+        "season": "Mùa hè",
+        "shape": "Cổ điển",
+        "sleeve": "Tay ngắn",
+        "style": ["Thể thao", "Cơ bản", "Hàn Quốc", "Đường phố"],
+        "tallFit": ""
     },
-    "listPromotion": [
-        {
-           "from": 5,
-           "to": 10,
-           "discount": 25000 
-        },
-        {
-           "from": 11,
-           "to": 15,
-           "discount": 40000 
-        }
-    ],
-    "classification": {
-        "classifies": {
-            "first":{
-                "title": "Màu sắc",
-                "images": [],
-                "types": ["Trắng", "Đen"]
-            },
-            "second": {
-                "title": "Kích thước",
-                "types": ["S", "M"]
-            }
-        },
-        "tablePrice": [
-            {
-                "firstClassifyName": "Trắng",
-                "price": 150000,
-                "sku": "",
-                "inventory": 50
-            },
-            {
-                "firstClassifyName": "Đen",
-                "price": 150000,
-                "sku": "",
-                "inventory": 75
-            }
-        ]
-    }
+    "price": 1000,
+    "situation": "mới",
+    "sku": "ATTENJI",
+    "tableSize": null,
+    "title": "Áo Thun Nam TENJI STORE CT475307TG Tay Ngắn Cổ Bẻ VNXK LOGo Chữ B Nhiều Màu Thun Cotton Trẻ Trung Năng Động (44 - 76KG)",
+    "video": ""
 }

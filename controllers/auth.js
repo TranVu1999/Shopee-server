@@ -167,7 +167,7 @@ module.exports = {
                 .json({success: false, message: "Thiếu thông tin đăng nhập"})
             }
 
-            const filter = {userLogin, role}
+            const filter = {userLogin}
                 account = await Account.findOne(filter);
                 if(!account){
                     return res
