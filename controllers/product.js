@@ -1,3 +1,5 @@
+const url = require('url');
+
 // Models
 const Account = require("./../models/account");
 const ProductCategory = require("./../models/product_category");
@@ -79,13 +81,13 @@ module.exports = {
       }
       
 
-      // const isAccept = await validateProductInformation(
-      //   title,
-      //   avatar,
-      //   categories,
-      //   description,
-      //   price
-      // );
+      const isAccept = await validateProductInformation(
+        title,
+        avatar,
+        categories,
+        description,
+        price
+      );
 
       if (isAccept) {
         return res.status(400).json({
@@ -127,6 +129,33 @@ module.exports = {
         success: true,
         message: "Dữ liệu được cập nhật",
         product: newProduct,
+      });
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+  },
+
+  /**
+   * Add new product category
+   */
+  getByCategory: async function (req, res) {
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+    const q = url.parse(fullUrl, true);
+    const qdata = q.query;
+    console.log(qdata.slug)
+
+    try {
+      
+
+      return res.json({
+        success: true,
+        message: "Dữ liệu được cập nhật"
       });
     } catch (error) {
         console.log(error);

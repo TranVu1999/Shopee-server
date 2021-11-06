@@ -11,4 +11,12 @@ const productController = require('../controllers/product');
 router.post('/', verifyToken, productController.add);
 
 
+// ================= GET ==================
+
+// @route GET api/product/category/:slug
+// @desc get list product by category
+// @access Public
+router.get('/category', productController.getByCategory);
+
+
 module.exports = router;

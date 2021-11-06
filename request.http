@@ -720,3 +720,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     "title": "Áo Thun Nam TENJI STORE CT475307TG Tay Ngắn Cổ Bẻ VNXK LOGo Chữ B Nhiều Màu Thun Cotton Trẻ Trung Năng Động (44 - 76KG)",
     "video": ""
 }
+
+
+# Get list product by category
+###
+GET http://localhost:5000/api/product/category?slug=thoi-trang-nam
+Content-Type: application/json
