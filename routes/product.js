@@ -13,10 +13,10 @@ router.post('/', verifyToken, productController.add);
 
 // ================= GET ==================
 
-// @route GET api/product/category/:slug
+// @route GET api/product
 // @desc get list product by category
 // @access Public
-router.get('/category', productController.getByCategory);
+router.get('/', productController.get);
 
 
 module.exports = router;

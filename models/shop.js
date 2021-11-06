@@ -47,6 +47,11 @@ const ShopSchema = new Schema({
         default: []
     },
 
+    score: {
+        type: Number,
+        default: 0
+    },
+
     valuateShop: {
         type: Schema.Types.ObjectId,
         ref: "ClassifyShop"

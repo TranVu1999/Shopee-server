@@ -724,5 +724,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 
 # Get list product by category
 ###
-GET http://localhost:5000/api/product/category?slug=thoi-trang-nam
+GET http://localhost:5000/api/product?type=category&category=thoi-trang-nam&page=0
 Content-Type: application/json

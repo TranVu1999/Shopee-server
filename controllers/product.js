@@ -49,6 +49,14 @@ async function validateProductInformation(
   return !res;
 }
 
+
+function getListProductByCategory(listProduct, category) {
+  const regex = /\s/g;
+  return listProduct.filter(prod => {
+    return Format.removeAccents(prod.categories[0]).toLowerCase().replace(regex, "-") === category
+  });
+}
+
 module.exports = {
   /**
    * Add new product category
@@ -143,19 +151,31 @@ module.exports = {
   /**
    * Add new product category
    */
-  getByCategory: async function (req, res) {
+  get: async function (req, res) {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     const q = url.parse(fullUrl, true);
     const qdata = q.query;
-    console.log(qdata.slug)
-
+    const {type, page} = qdata;
+    
     try {
-      
+      const listProduct_db = await Product.find({status: true});
+      let listProduct = [];
+
+      switch(type) {
+        case "category":
+          const {category} = qdata;
+          listProduct = getListProductByCategory(listProduct_db, category);
+          break;
+        default:
+          break;
+      }
+
 
       return res.json({
         success: true,
-        message: "Dữ liệu được cập nhật"
+        message: "Dữ liệu được cập nhật",
+        listProduct
       });
     } catch (error) {
         console.log(error);
