@@ -200,13 +200,31 @@ module.exports = {
     const {id} = req.params;
     
     try {
-      const product_db = await Product.findOne({_id: id, status: true});
+      const [product_db] = await Promise.all([
+        Product.findOne({_id: id, status: true}).lean()
+      ]);
 
-      return res.json({
-        success: true,
-        message: "Dữ liệu được cập nhật",
-        product: product_db
+      const product = {
+        ...product_db,
+        categories: [...product_db.categories, product_db.title]
+      }
+
+      if(product_db) {
+        return res.json({
+          success: true,
+          message: "Lấy dữ liệu thành công",
+          product
+        });
+      }
+
+      return res
+      .status(401).json({
+        success: false,
+        message: "Không có dữ liệu trùng khớp"
       });
+
+      
+
     } catch (error) {
         console.log(error);
 
