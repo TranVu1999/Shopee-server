@@ -358,21 +358,21 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/shop
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTcxN2FmZmFiNWIyNjNhMmMzMjI0MjIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzYzNjk0NjJ9.WMw_7Y_57sxu__aVBStYwyoSfvNT3pqU2VPQDB3fNIA
 
 
 # Update information of shop
 ###
-POST http://localhost:5000/api/shop
+PUT http://localhost:5000/api/shop/shop-management/618901212d5f182b889d1c55
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTMwYjA3NDI2YzExNGI2MjMyZTQ2NmQiLCJyb2xlIjoib3duZXIiLCJpYXQiOjE2MzA5MzgyODB9.tUt2Dm2RSiffoWN3Nh9fmB0wCRUx0-i3SuJxcY19tus
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTcxN2FmZmFiNWIyNjNhMmMzMjI0MjIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzYzNjk0NjJ9.WMw_7Y_57sxu__aVBStYwyoSfvNT3pqU2VPQDB3fNIA
 
 {
-    "avatar": "",
-    "backgroundImage": "",
-    "brand": "            Barista         Coffee",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/shops%2F730ef4c2b4baa407529b223c14404695_tn.jpg?alt=media&token=f671584c-54a9-4a60-a5b3-6f631a49d847",
+    "backgroundImage": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/shops%2Ffashion-clothes-store-background_1308-52143.jpg?alt=media&token=cbff3f52-9bfb-4039-9416-b1f20e49a3ca",
+    "brand": "Vũ Trần Clothes",
     "images": [],
-    "description": ""
+    "description": "T-YOO 😘Dear customer, welcome to our shop, our shop specializes in men's clothing with unique styles and sufficient supply. Welcome to buy! Tips: 💕Pay attention to this shop, baby priority shipment! 💕Normally, you will receive the goods within 5 to 12 days. 💕If you buy a lot of pieces at once, you can give you a corresponding discount! 💕If you have any questions, please contact us and we will serve you wholeheartedly. If you like, please come and buy."
 }
 
 // ================== PRODUCT CATEGORY ==================

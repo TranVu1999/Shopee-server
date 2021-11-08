@@ -1,4 +1,4 @@
-const url = require('url');
+const url = require("url");
 
 // Models
 const Account = require("./../models/account");
@@ -50,8 +50,12 @@ async function validateProductInformation(
 }
 
 function getListProductByCategory(listProduct, category) {
-  return listProduct.filter(prod => {
-    return Format.removeAccents(Format.removeRedundantSpaceCharacter(prod.categories[0])) === category
+  return listProduct.filter((prod) => {
+    return (
+      Format.removeAccents(
+        Format.removeRedundantSpaceCharacter(prod.categories[0])
+      ) === category
+    );
   });
 }
 
@@ -78,7 +82,7 @@ module.exports = {
 
     try {
       const account_db = await Account.findById(accountId);
-      
+
       if (!account_db && (role === "owner" || role === "admin")) {
         return res.status(400).json({
           success: false,
@@ -94,8 +98,6 @@ module.exports = {
         price
       );
 
-      
-
       if (isAccept) {
         return res.status(400).json({
           success: false,
@@ -105,10 +107,8 @@ module.exports = {
 
       const fm_title = title.toLowerCase().replace(/\s+/g, " ").trim();
       const fm_alias = Format.removeRedundantSpaceCharacter(
-        Format.removeSpecialCharacer(
-          Format.removeAccents(fm_title)
-        )
-      )
+        Format.removeSpecialCharacer(Format.removeAccents(fm_title))
+      );
 
       const newProduct = new Product({
         title: fm_title,
@@ -135,7 +135,6 @@ module.exports = {
       });
 
       await Promise.all([newProduct.save(), newProductSaveChange.save()]);
-      
 
       return res.json({
         success: true,
@@ -143,12 +142,12 @@ module.exports = {
         product: newProduct,
       });
     } catch (error) {
-        console.log(error);
+      console.log(error);
 
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
     }
   },
 
@@ -156,19 +155,19 @@ module.exports = {
    * Add new product category
    */
   filter: async function (req, res) {
-    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    var fullUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
 
     const q = url.parse(fullUrl, true);
     const qdata = q.query;
-    const {type, page} = qdata;
-    
+    const { type, page } = qdata;
+
     try {
-      const listProduct_db = await Product.find({status: true});
+      const listProduct_db = await Product.find({ status: true });
       let listProduct = [];
 
-      switch(type) {
+      switch (type) {
         case "category":
-          const {category} = qdata;
+          const { category } = qdata;
           listProduct = getListProductByCategory(listProduct_db, category);
           break;
         default:
@@ -176,64 +175,57 @@ module.exports = {
           break;
       }
 
-
       return res.json({
         success: true,
         message: "Dữ liệu được cập nhật",
-        listProduct
+        listProduct,
       });
     } catch (error) {
-        console.log(error);
+      console.log(error);
 
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
     }
   },
-
 
   /**
    * Add new product category
    */
   getDetail: async function (req, res) {
-    const {id} = req.params;
-    
+    const { id } = req.params;
+
     try {
       const [product_db] = await Promise.all([
-        Product.findOne({_id: id, status: true}).lean()
+        Product.findOne({ _id: id, status: true }).lean(),
+        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1 }}),
       ]);
 
       const product = {
         ...product_db,
-        categories: [...product_db.categories, product_db.title]
-      }
+        categories: [...product_db.categories, product_db.title],
+      };
 
-      if(product_db) {
+      if (product_db) {
         return res.json({
           success: true,
           message: "Lấy dữ liệu thành công",
-          product
+          product,
         });
       }
 
-      return res
-      .status(401).json({
+      return res.status(401).json({
         success: false,
-        message: "Không có dữ liệu trùng khớp"
+        message: "Không có dữ liệu trùng khớp",
       });
-
-      
-
     } catch (error) {
-        console.log(error);
+      console.log(error);
 
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
     }
   },
-
-  
 };

@@ -109,7 +109,7 @@ module.exports = {
 
             if(socialToken) {
                 const {name, picture, email} = jwt_decode(socialToken);
-                const filter = {userLogin: email, role};
+                const filter = {userLogin: email};
                 account = await Account.findOne(filter);
 
                 if(!account) {
@@ -152,7 +152,7 @@ module.exports = {
                 }
 
                 const accessToken = jwt.sign({
-                    accountId: account._id, role
+                    accountId: account._id, role: account.role
                 }, process.env.ACCESS_TOKEN_SECRET);
     
     
@@ -169,6 +169,7 @@ module.exports = {
 
             const filter = {userLogin}
                 account = await Account.findOne(filter);
+                
                 if(!account){
                     return res
                     .json({
@@ -191,14 +192,14 @@ module.exports = {
                         });
     
                         await newShop.save();
-                        console.log("created new shop");
                     }
                 }
                 
                 const accessToken = jwt.sign({
-                    accountId: account._id, role
+                    accountId: account._id, role: account.role
                 }, process.env.ACCESS_TOKEN_SECRET);
-    
+                
+                
     
                 return res.json({
                     success: true, 

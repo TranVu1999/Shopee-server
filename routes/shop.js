@@ -13,10 +13,10 @@ router.get('/', verifyToken, shopController.getInformation);
 
 // ================= POST ==================
 
-// @route POST api/shop
+// @route POST api/shop/shop-management
 // @desc put information of shop
 // @access Private
-router.post('/', verifyToken, shopController.updateInformation);
+router.put('/shop-management/:id', verifyToken, shopController.updateInformation);
 
 
 
