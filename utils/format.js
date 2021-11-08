@@ -1,5 +1,5 @@
 module.exports = {
-    alias: str => str.replace(/ /g, "-"),
+    removeRedundantSpaceCharacter: str => str.toLowerCase().replace(/\s/g, "-"),
     removeAccents: (str) => {
         var AccentsMap = [
           "aàảãáạăằẳẵắặâầẩẫấậ",
@@ -22,5 +22,6 @@ module.exports = {
           str = str.replace(re, char);
         }
         return str;
-    }
+    },
+    removeSpecialCharacer: str => str.replace(/[^\w\s]/gi, '')
 }

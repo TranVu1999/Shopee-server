@@ -13,10 +13,17 @@ router.post('/', verifyToken, productController.add);
 
 // ================= GET ==================
 
+
 // @route GET api/product
 // @desc get list product by category
 // @access Public
-router.get('/', productController.get);
+router.get('/filter', productController.filter);
+
+// @route GET api/product/:id
+// @desc get detail product
+// @access Public
+router.get('/:id', productController.getDetail);
+
 
 
 module.exports = router;

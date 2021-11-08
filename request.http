@@ -695,34 +695,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 { 
     "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/products%2F37d2acf0dbe662ef51fd81c1f2bdc345.jpg?alt=media&token=d8e358ec-fb8b-469c-a97f-78ae8e5918e1",
     "categories": ["Thời Trang Nam", "Áo", "Áo thun"],
-    "classification": {},
-    "description": "👍Bảo hành 7 ngày đổi trả miễn phí khi sản phẩm không đúng size mẫu\n⛑️Có thể kết hợp nhiều loại trang phục mang lại phong cách cá tính riêng\n🖐 Có 4 Size Các Bạn Lựa Chọn Từ 43-76kg Luôn\n\nSize M.   :  Cao 1m5-> 1m63 ~ cân nặng 44-54kg\n   |—-> Chiều Ngang Áo Size M: 48-48.5cm. Dài 68cm\nSize L.    :  Cao 1m6-> 1m67  ~ cân nặng 55-65kg\n   |—-> Chiều Ngang Áo Size L: 50-50.5cm .  Dài 70cm \nSize Xl.   :  Cao 1m65-> 1m72 ~ cân nặng 65-72kg\n   |—-> Chiều Ngang Áo síz XL:51.5-52cm .  Dài 72cm \nSize XXL:   Cao m7-> 1m77 ~ Cân nặng 70kg-76kg\n   |—-> Chiều Ngang Áo Size XXL :53.5-54cm. Dài 74cm\n❤Lưu Ý: Màu Đỏ Đô , Xanh Đen Các Anh Chị Gặt Riêng Giúp E 2-3 Nước Đầu Để An Toàn Ạ , Đừng Giặt Chun Với Áo Trắng Nhé!!\n \nÁo thun Nam Hàng Shop Jarmon Group Vải  Côtton🕶 \nGiá Sản Xuất Tận Xưởng . \nKhách Quan Tâm Có Thể Liên Hệ Xưởng Áo TENJI STORE Nhé\n\nÁo Thun Nam Có Cổ sở hữu 17 màu sắc phù hợp với mọi độ tuổi, mọi sở thích và luôn bắt kịp xu thế.\n\nNay chúng tôi thêm vào bộ sưu tập 4 màu mới Cực Hot 2021 Phối Viền, được chăm chút từ việc chọn màu, chất liệu đến đường may, đảm bảo sẽ làm hài lòng dù khách hàng khó tính nhất.\n\n🔸 Chất liệu:vải cotton , mịn mát, không RÚT!\n🔸 Co giãn 4 chiều giúp bạn thoải mái hoạt động\n🔸 5 size: , M, L, XL, XXL từ -kg\n👉 Nếu vẫn chưa biết chọn size, màu thì bạn chỉ cần để lại (.) hoặc #inbox, nhân viên sẽ liên hệ tư vấn ngay cho bạn.\n=======",
-    "images": [],
-    "inventory": 50,
-    "listPrice": [],
-    "optionalAttributes": {
-        "brand": "ADAM STORE",
-        "collar": "Cổ chữ V",
-        "large": "Có",
-        "material": ["Cotton"],
-        "originPlace": "Việt Nam",
-        "pattern": ["Trơn"],
-        "season": "Mùa hè",
-        "shape": "Cổ điển",
-        "sleeve": "Tay ngắn",
-        "style": ["Thể thao", "Cơ bản", "Hàn Quốc", "Đường phố"],
-        "tallFit": ""
-    },
-    "price": 1000,
-    "situation": "mới",
-    "sku": "ATTENJI",
-    "tableSize": null,
-    "title": "Áo Thun Nam TENJI STORE CT475307TG Tay Ngắn Cổ Bẻ VNXK LOGo Chữ B Nhiều Màu Thun Cotton Trẻ Trung Năng Động (44 - 76KG)",
-    "video": ""
+    
+    "title": "[mabrak99 giảm 10% đơn 99k]áo sơ mi nam tay dài công sở akuba dáng ôm, vải lụa không nhăn, thấm hút mồ hôi tốt 01ab2044"
 }
-
 
 # Get list product by category
 ###
-GET http://localhost:5000/api/product?type=category&category=thoi-trang-nam&page=0
+GET http://localhost:5000/api/product?type=all
 Content-Type: application/json
+
+# Get list product by category
+###
+GET http://localhost:5000/api/product/filter?type=category&category=thoi-trang-nam&page=0
+Content-Type: application/json
+
+# get product
+###
+GET http://localhost:5000/api/product/617d780b3821802c10db2eb8
+Content-Type: application/json
+
+

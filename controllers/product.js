@@ -49,11 +49,9 @@ async function validateProductInformation(
   return !res;
 }
 
-
 function getListProductByCategory(listProduct, category) {
-  const regex = /\s/g;
   return listProduct.filter(prod => {
-    return Format.removeAccents(prod.categories[0]).toLowerCase().replace(regex, "-") === category
+    return Format.removeAccents(Format.removeRedundantSpaceCharacter(prod.categories[0])) === category
   });
 }
 
@@ -80,14 +78,13 @@ module.exports = {
 
     try {
       const account_db = await Account.findById(accountId);
-      console.log({account_db})
+      
       if (!account_db && (role === "owner" || role === "admin")) {
         return res.status(400).json({
           success: false,
           message: "Bạn không có quyền thực hiện thao tác này.",
         });
       }
-      
 
       const isAccept = await validateProductInformation(
         title,
@@ -97,6 +94,8 @@ module.exports = {
         price
       );
 
+      
+
       if (isAccept) {
         return res.status(400).json({
           success: false,
@@ -105,10 +104,15 @@ module.exports = {
       }
 
       const fm_title = title.toLowerCase().replace(/\s+/g, " ").trim();
+      const fm_alias = Format.removeRedundantSpaceCharacter(
+        Format.removeSpecialCharacer(
+          Format.removeAccents(fm_title)
+        )
+      )
 
       const newProduct = new Product({
         title: fm_title,
-        alias: Format.alias(fm_title),
+        alias: fm_alias,
         video,
         avatar,
         categories,
@@ -151,7 +155,7 @@ module.exports = {
   /**
    * Add new product category
    */
-  get: async function (req, res) {
+  filter: async function (req, res) {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     const q = url.parse(fullUrl, true);
@@ -168,6 +172,7 @@ module.exports = {
           listProduct = getListProductByCategory(listProduct_db, category);
           break;
         default:
+          listProduct = listProduct_db;
           break;
       }
 
@@ -186,4 +191,31 @@ module.exports = {
         });
     }
   },
+
+
+  /**
+   * Add new product category
+   */
+  getDetail: async function (req, res) {
+    const {id} = req.params;
+    
+    try {
+      const product_db = await Product.findOne({_id: id, status: true});
+
+      return res.json({
+        success: true,
+        message: "Dữ liệu được cập nhật",
+        product: product_db
+      });
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+  },
+
+  
 };
