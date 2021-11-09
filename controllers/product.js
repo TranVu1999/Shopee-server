@@ -5,6 +5,7 @@ const Account = require("./../models/account");
 const ProductCategory = require("./../models/product_category");
 const Product = require("./../models/product");
 const ProductSaveChange = require("./../models/product_save_change");
+const Shop = require("./../models/shop");
 
 //Modules
 const Format = require("./../utils/format");
@@ -199,12 +200,37 @@ module.exports = {
     try {
       const [product_db] = await Promise.all([
         Product.findOne({ _id: id, status: true }).lean(),
-        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1 }}),
+        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1 } }),
       ]);
+
+      const filterByAccount = { account: product_db.account };
+
+      const [shop_db, account_db, amountProduct, listProductOfStore] = await Promise.all([
+        Shop.findOne(filterByAccount).lean(),
+        Account.findById(product_db.account),
+        Product.countDocuments(filterByAccount),
+        Product.find(filterByAccount).sort("soldNumber").limit(5),
+      ]);
+
+      const store = {
+        _id: shop_db._id,
+        brand: shop_db.brand,
+        alias: shop_db.alias,
+        avatar: shop_db.avatar,
+        type: account_db.role,
+        rating: 0,
+        amountProduct,
+        amountTracker: shop_db.listTracker.length,
+        createdDate: shop_db.createdDate,
+        responseRate: 100,
+        responseTime: "trong vài giờ",
+      };
 
       const product = {
         ...product_db,
         categories: [...product_db.categories, product_db.title],
+        store,
+        listProductOfStore,
       };
 
       if (product_db) {
