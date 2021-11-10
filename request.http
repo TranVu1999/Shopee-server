@@ -713,5 +713,3 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/product/617d780b3821802c10db2eb8
 Content-Type: application/json
-
-

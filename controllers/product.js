@@ -163,7 +163,10 @@ module.exports = {
     const { type, page } = qdata;
 
     try {
-      const listProduct_db = await Product.find({ status: true });
+      const listProduct_db = await Product.find({ status: true }).lean();
+      console.log(listProduct_db);
+
+
       let listProduct = [];
 
       switch (type) {

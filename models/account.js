@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const AccountSchema = new Schema({
     userLogin: {
         type: String,
-        default: ""
+        default: "",
+        index: true // field level
     },
 
     password: {
@@ -53,5 +54,7 @@ const AccountSchema = new Schema({
         default: true
     }
 });
+
+// AccountSchema.index({userLogin: 1, password: 1}); // schema level
 
 module.exports = mongoose.model("Account", AccountSchema)

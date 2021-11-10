@@ -13,13 +13,21 @@ const administrativeUnitRouter = require('./routes/administrative_unit');
 // connect mongodb
 const connectDB = async () =>{
     try {
-        await mongoose.connect('mongodb+srv://tranleanhvu1999:tranleanhvu1999@shopee.u4d5e.mongodb.net/shopee?retryWrites=true&w=majority', {
+        // await mongoose.connect('mongodb+srv://tranleanhvu1999:tranleanhvu1999@shopee.u4d5e.mongodb.net/shopee?retryWrites=true&w=majority', {
+        //     // Các tham số này là mặc định
+        //     useCreateIndex: true,
+        //     useNewUrlParser: true,
+        //     useUnifiedTopology: true,
+        //     useFindAndModify: false
+        // })
+
+        await mongoose.connect('mongodb://localhost:27017/shopee_db', {
             // Các tham số này là mặc định
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false
-        })
+        });
 
         console.log("MongoDB Connected")
     } catch (error) {

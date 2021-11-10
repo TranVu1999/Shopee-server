@@ -19,6 +19,7 @@ router.post('/', verifyToken, productController.add);
 // @access Public
 router.get('/filter', productController.filter);
 
+
 // @route GET api/product/:id
 // @desc get detail product
 // @access Public
