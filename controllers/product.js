@@ -202,29 +202,34 @@ module.exports = {
 
     try {
       const [product_db] = await Promise.all([
-        Product.findOne({ _id: id, status: true }).lean(),
-        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1 } }),
+        Product.findOne({ _id: id, status: true })
+        .lean()
+        .populate({
+          path: "shop",
+          select: "avatar brand alias listTracker createdDate",
+          populate: {
+            path: "account",
+            select: "role"
+          }
+        }),
+        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1, scoreView: 3 } }),
       ]);
 
-      const filterByAccount = { account: product_db.account };
-
-      const [shop_db, account_db, amountProduct, listProductOfStore] = await Promise.all([
-        Shop.findOne(filterByAccount).lean(),
-        Account.findById(product_db.account),
-        Product.countDocuments(filterByAccount),
-        Product.find(filterByAccount).sort("soldNumber").limit(5),
+      const [amountProduct, listProductOfStore] = await Promise.all([
+        Product.countDocuments({shop: product_db.shop}),
+        Product.find({shop: product_db.shop}).sort("soldNumber").limit(5), // lấy top 5 sản phẩm bán chạy nhất
       ]);
 
       const store = {
-        _id: shop_db._id,
-        brand: shop_db.brand,
-        alias: shop_db.alias,
-        avatar: shop_db.avatar,
-        type: account_db.role,
+        _id: product_db.shop._id,
+        brand: product_db.shop.brand,
+        alias: product_db.shop.alias,
+        avatar: product_db.shop.avatar,
+        type: product_db.shop.account.role,
         rating: 0,
         amountProduct,
-        amountTracker: shop_db.listTracker.length,
-        createdDate: shop_db.createdDate,
+        amountTracker: product_db.shop.listTracker.length,
+        createdDate: product_db.shop.createdDate,
         responseRate: 100,
         responseTime: "trong vài giờ",
       };

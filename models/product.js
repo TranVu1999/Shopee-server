@@ -76,9 +76,9 @@ const ProductSchema = new Schema({
     default: "",
   },
 
-  account: {
+  shop: {
     type: Schema.Types.ObjectId,
-    ref: "Account",
+    ref: "Shop",
   },
 
   createdDate: {
