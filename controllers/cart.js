@@ -158,6 +158,37 @@ module.exports = {
     }
   },
 
+
+  /**
+   * Function: remove cart,
+   * Params: accountId, cartId,
+   * Description:
+   * - 
+   */
+  remove: async function (req, res) {
+    const { accountId } = req;
+    const cartId = req.params.id;
+
+    try {
+
+      await Cart.findOneAndDelete({account: accountId, _id: cartId});
+
+      const cart = await formatCart(accountId);
+
+      return res.json({
+        success: true,
+        message: "Cập nhật giỏ hàng thành công!",
+        cart
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
   /**
    * Function: get list product from cart by account,
    * Params: accountId,

@@ -11,9 +11,9 @@ const cartController = require("../controllers/cart");
 router.post("/", verifyToken, cartController.add);
 
 
-// ================= PUR ==================
+// ================= PUT ==================
 
-// @route PUR api/cart/:id
+// @route PUT api/cart/:id
 // @desc update cart
 // @access Private
 router.put("/:id", verifyToken, cartController.update);
@@ -25,5 +25,13 @@ router.put("/:id", verifyToken, cartController.update);
 // @desc get list product
 // @access Private
 router.get("/", verifyToken, cartController.get);
+
+
+// ================= DELETE ==================
+
+// @route DELETE api/cart/:id
+// @desc remove cart
+// @access Private
+router.delete("/:id", verifyToken, cartController.remove);
 
 module.exports = router;
