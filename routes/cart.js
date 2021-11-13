@@ -6,9 +6,17 @@ const cartController = require("../controllers/cart");
 // ================= POST ==================
 
 // @route POST api/cart
-// @desc update cart
+// @desc add cart
 // @access Private
 router.post("/", verifyToken, cartController.add);
+
+
+// ================= PUR ==================
+
+// @route PUR api/cart/:id
+// @desc update cart
+// @access Private
+router.put("/:id", verifyToken, cartController.update);
 
 
 // ================= GET ==================

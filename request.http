@@ -735,6 +735,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 }
 
 
+# Update product in cart
+###
+PUT http://localhost:5000/api/cart/618cc8aa2f55bdc48e5c2e61
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNjU5NzU1NH0.zPpYhSeMNHxIVy1aIceWa0PfhxWVmnz6Qh5TB_L9w1Y
+
+{ 
+    "product": "617d780b3821802c10db2eb8",
+    "amount": 2,
+    "classification": {
+        "first": "Trắng",
+        "second": "S(<55kg)"
+    }
+}
+
+
 # Get list product in cart
 ###
 GET http://localhost:5000/api/cart
