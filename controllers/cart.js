@@ -126,13 +126,12 @@ module.exports = {
       const cartDuplicate = await Cart.findOne(filter).lean();
       
 
-      if(!cartDuplicate || cartDuplicate._id === cartId) {
+      if(!cartDuplicate || cartDuplicate._id.toString() === cartId) {
         await Cart.findByIdAndUpdate(cartId, {
           amount,
           classification,
         });
       } else {
-
         await Promise.all([
           Cart.findByIdAndUpdate(cartDuplicate._id, {
             amount: amount + cartDuplicate.amount,
