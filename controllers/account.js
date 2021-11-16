@@ -69,8 +69,6 @@ module.exports = {
                 })
             }
 
-            console.log({account_db})
-
             return res.json({
                 success: true,
                 message: "You can get this data",

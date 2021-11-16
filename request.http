@@ -763,3 +763,41 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 DELETE http://localhost:5000/api/cart/618c9cd890fb781764f7583b
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNjU5NzU1NH0.zPpYhSeMNHxIVy1aIceWa0PfhxWVmnz6Qh5TB_L9w1Y
+
+
+# Remove multi cartItem
+###
+PUT http://localhost:5000/api/cart/remove-multi
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNjU5NzU1NH0.zPpYhSeMNHxIVy1aIceWa0PfhxWVmnz6Qh5TB_L9w1Y
+
+{
+    "listCartItem": ["6193245b2f55bdc48e5db6d5", "6193245e2f55bdc48e5db6da"]
+}
+
+
+// ================== Invoice ==================
+# Add new product to cart
+###
+POST http://localhost:5000/api/invoice
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNjU5NzU1NH0.zPpYhSeMNHxIVy1aIceWa0PfhxWVmnz6Qh5TB_L9w1Y
+
+{ 
+    "listShop": [
+        {
+            "shopId": "",
+            "listProduct": [
+                {
+                    "productId": "",
+                    "amount": "",
+                    "variant": {
+                        "firstClassificationName": "",
+                        "secondClassificationName": ""
+                    }
+                }
+            ]
+        }
+    ],
+    "receivedAddress": ""
+}

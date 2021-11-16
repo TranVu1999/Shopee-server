@@ -189,6 +189,39 @@ module.exports = {
   },
 
   /**
+   * Function: remove multi cart item,
+   * Params: accountId,
+   * Description:
+   * - remove multi cartItem of account
+   */
+   removeMulti: async function (req, res) {
+    const { accountId } = req;
+    const {listCartItem} = req.body;
+
+    try {
+      const listRemoveApi = [];
+      listCartItem.forEach(cartItem => {
+        listRemoveApi.push(Cart.findOneAndDelete({_id: cartItem, account: accountId}));
+      })
+
+      await Promise.all(listRemoveApi);
+      const cart = await formatCart(accountId);
+
+      return res.json({
+        success: true,
+        message: "Cập nhật giỏ hàng thành công!",
+        cart
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
+  /**
    * Function: get list product from cart by account,
    * Params: accountId,
    * Description:

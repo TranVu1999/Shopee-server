@@ -13,6 +13,11 @@ router.post("/", verifyToken, cartController.add);
 
 // ================= PUT ==================
 
+// @route DELETE api/cart/
+// @desc remove cart
+// @access Private
+router.put("/remove-multi", verifyToken, cartController.removeMulti);
+
 // @route PUT api/cart/:id
 // @desc update cart
 // @access Private
@@ -33,5 +38,6 @@ router.get("/", verifyToken, cartController.get);
 // @desc remove cart
 // @access Private
 router.delete("/:id", verifyToken, cartController.remove);
+
 
 module.exports = router;
