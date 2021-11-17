@@ -786,18 +786,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 { 
     "listShop": [
         {
-            "shopId": "",
+            "shopId": "618901212d5f182b889d1c55",
             "listProduct": [
                 {
-                    "productId": "",
-                    "amount": "",
+                    "cartId": "619326f42f55bdc48e5db94e",
+                    "productId": "6184f3025c6a5435d8d73c7f",
+                    "amount": "9",
                     "variant": {
-                        "firstClassificationName": "",
-                        "secondClassificationName": ""
-                    }
+                        "firstClassificationName": "Trắng",
+                        "secondClassificationName": "M"
+                    },
+                    "price": "1000",
+                    "image": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/products%2F7a8c194cba1665cd648f23093157ebed.jpg?alt=media&token=05539194-1ce6-46e8-a915-647b00e32b7a",
+                    "title": "áo sơ mi nam vettino dài tay cổ bẻ dáng ôm hàn quốc vải lụa thái cao cấp chống nhăn"
                 }
             ]
         }
     ],
-    "receivedAddress": ""
+    "receivedAddress": "61926953b5d22307685efe8a"
 }

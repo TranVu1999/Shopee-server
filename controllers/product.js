@@ -212,7 +212,7 @@ module.exports = {
             select: "role"
           }
         }),
-        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1, scoreView: 3 } }),
+        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1, scoreView: 1 } }),
       ]);
 
       const [amountProduct, listProductOfStore] = await Promise.all([

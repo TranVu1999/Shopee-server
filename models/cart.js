@@ -24,5 +24,6 @@ const CartSchema = new Schema({
 });
 
 CartSchema.index({account: 1, product: 1})
+CartSchema.index({account: 1, _id: 1})
 
 module.exports = mongoose.model("Cart", CartSchema)

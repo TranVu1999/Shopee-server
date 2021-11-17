@@ -53,4 +53,6 @@ const AddressSchema = new Schema({
     }
 });
 
+AddressSchema.index({_id: 1, account: 1}); // schema level
+
 module.exports = mongoose.model("Address", AddressSchema)

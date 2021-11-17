@@ -14,7 +14,27 @@ const InvoiceDetailSchema = new Schema({
         index: true
     },
 
-    classification: {
+    title: {
+        type: String,
+        default: "",
+    },
+
+    alias: {
+        type: String,
+        default: ""
+    },
+
+    price: {
+        type: Number,
+        default: 1000
+    },
+    
+    image: {
+        type: String,
+        default: ""
+    },
+
+    variant: {
         type: Object,
         default: null
     },

@@ -5,13 +5,13 @@ const InvoiceSchema = new Schema({
   account: {
     type: Schema.Types.ObjectId,
     ref: "Account",
-    index: true
+    index: true,
   },
 
   shop: {
     type: Schema.Types.ObjectId,
     ref: "Shop",
-    index: true
+    index: true,
   },
 
   receivedAddress: {
@@ -23,15 +23,26 @@ const InvoiceSchema = new Schema({
     type: Date,
     default: new Date(),
   },
+  total: {
+    type: Number,
+    default: 0,
+  },
 
   statuation: {
     type: String,
-    enum: ["Đơn hàng đã đặt", "Đã xác nhận thông tin thanh toán", "Đơn hàng đã bị hủy", "Đơn hàng đã nhận", "Đã gia cho ĐVVC", "Đơn hàng đã giao"],
-    deafult: "Đơn hàng đã đặt",
-    index: true
+    enum: [
+      "Đơn hàng đã đặt",
+      "Đã xác nhận thông tin thanh toán",
+      "Đơn hàng đã bị hủy",
+      "Đơn hàng đã nhận",
+      "Đã gia cho ĐVVC",
+      "Đơn hàng đã giao",
+    ],
+    default: "Đơn hàng đã đặt",
+    index: true,
   },
 });
 
-InvoiceSchema.index({shop: 1, statuation: 1});
+InvoiceSchema.index({ shop: 1, statuation: 1 });
 
 module.exports = mongoose.model("Invoice", InvoiceSchema);
