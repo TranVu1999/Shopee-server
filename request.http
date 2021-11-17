@@ -716,8 +716,6 @@ Content-Type: application/json
 
 
 
-
-
 // ================== Cart ==================
 # Add new product to cart
 ###
@@ -787,6 +785,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     "listShop": [
         {
             "shopId": "618901212d5f182b889d1c55",
+            "message": "123456789",
             "listProduct": [
                 {
                     "cartId": "619326f42f55bdc48e5db94e",
@@ -804,4 +803,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
         }
     ],
     "receivedAddress": "61926953b5d22307685efe8a"
+}
+
+
+# Verify Invoice
+###
+POST http://localhost:5000/api/invoice/confirm
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNjU5NzU1NH0.zPpYhSeMNHxIVy1aIceWa0PfhxWVmnz6Qh5TB_L9w1Y
+
+{ 
+    "listInvoice": ["6194e382a4a872317c256d1f"] 
 }

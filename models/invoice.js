@@ -14,6 +14,11 @@ const InvoiceSchema = new Schema({
     index: true,
   },
 
+  message: {
+    type: String,
+    default: ""
+  },
+
   receivedAddress: {
     type: Schema.Types.ObjectId,
     ref: "Address",

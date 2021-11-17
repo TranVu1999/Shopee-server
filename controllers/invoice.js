@@ -28,13 +28,16 @@ module.exports = {
       const listCartPromise = [];
       let mailerListProduct = "";
       let totalPrice = 0;
+      let urlVerify = "";
 
       listShop.forEach((shop) => {
         const newInvoice = new Invoice({
           account: accountId,
           shop: shop.shopId,
           receivedAddress,
+          message: shop.message
         });
+        urlVerify += newInvoice._id + ".";
         
         let total = 0;
         shop.listProduct.forEach(prod => {
@@ -111,7 +114,7 @@ module.exports = {
               <p>Tổng chi phí: <b style="display: inline-block; min-width: 100px;">${totalPrice + 38000}đ</b></p>
           </div>
 
-          <p style="border-top: 2px solid #ee4d2d; padding-top: 16px;">Nhấn <a href="http://localhost:3000/verify-purchase/" style="text-decoration: none; color: #ee4d2d; font-size: 20px;">tại đây</a> để chúng tôi có thể xác nhận được thông tin đơn hàng của bạn!</p>
+          <p style="border-top: 2px solid #ee4d2d; padding-top: 16px;">Nhấn <a href=${"http://localhost:3000/purchase-verify/" + urlVerify.slice(0, urlVerify.length - 1)} style="text-decoration: none; color: #ee4d2d; font-size: 20px;">tại đây</a> để chúng tôi có thể xác nhận được thông tin đơn hàng của bạn!</p>
           <p>Đường link này chỉ tôn tại trong vòng 24h.</p>
           <p style="margin-bottom: 20px;">Hóa đơn này sẽ bị hủy trong vòng 24h nếu bạn không xác nhận.</p>
           <p>Trân trọng,</p>
@@ -127,6 +130,41 @@ module.exports = {
       return res.json({
         success: true,
         message: "Đặt hàng thành công!",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
+
+  /**
+   * Function: confrim invoice,
+   * Params: accountId, list invoice_id
+   * Description:
+   */
+   verify: async function (req, res) {
+    const { accountId } = req;
+    const { listInvoice} = req.body;
+
+    try {
+
+      const listInvoiceUpdate = [];
+      listInvoice.forEach(invoice_id => {
+        listInvoiceUpdate.push(Invoice.findOneAndUpdate(
+          {account: accountId, _id: invoice_id}, 
+          {statuation: "Đã xác nhận thông tin thanh toán"}
+        ))
+      });
+
+      await Promise.all(listInvoiceUpdate);
+
+      return res.json({
+        success: true,
+        message: "Đơn hàng được xác nhận",
       });
     } catch (error) {
       console.log(error);

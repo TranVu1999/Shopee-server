@@ -71,7 +71,7 @@ module.exports = {
         "classification.second": classification.second,
       };
 
-      const cart = await Cart.findOneAndUpdate(
+      await Cart.findOneAndUpdate(
         filter,
         {
           account: accountId,
@@ -84,6 +84,8 @@ module.exports = {
           upsert: true,
         }
       ).lean();
+
+      const cart = await formatCart(accountId);
 
       return res.json({
         success: true,
