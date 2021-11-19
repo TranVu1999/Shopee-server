@@ -815,3 +815,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 { 
     "listInvoice": ["6194e382a4a872317c256d1f"] 
 }
+
+
+# Shop get list invoice
+###
+GET http://localhost:5000/api/invoice/management
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTcxN2FmZmFiNWIyNjNhMmMzMjI0MjIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzczMDU5NDF9.OF3a-X_uB4taU26a-YCsJhqs2oqDOg7u4rTRGaXYTAs

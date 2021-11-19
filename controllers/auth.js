@@ -102,7 +102,9 @@ module.exports = {
             password, 
             socialToken,
             role
-        } = req.body
+        } = req.body;
+
+        console.log({socialToken})
 
         try {
             let account = null;

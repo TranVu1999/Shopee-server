@@ -153,7 +153,7 @@ module.exports = {
   },
 
   /**
-   * Add new product category
+   * Get list products
    */
   filter: async function (req, res) {
     var fullUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
@@ -164,7 +164,6 @@ module.exports = {
 
     try {
       const listProduct_db = await Product.find({ status: true }).lean();
-      console.log(listProduct_db);
 
 
       let listProduct = [];
