@@ -104,8 +104,6 @@ module.exports = {
             role
         } = req.body;
 
-        console.log({socialToken})
-
         try {
             let account = null;
 

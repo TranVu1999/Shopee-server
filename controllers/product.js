@@ -82,7 +82,10 @@ module.exports = {
     } = req.body;
 
     try {
-      const account_db = await Account.findById(accountId);
+      const [account_db, shop_db] = await Promise.all([
+        Account.findById(accountId),
+        Shop.findOne({account: accountId})
+      ]);
 
       if (!account_db && (role === "owner" || role === "admin")) {
         return res.status(400).json({
@@ -125,7 +128,7 @@ module.exports = {
         classification,
         unused,
         sku,
-        account: accountId,
+        shop: shop_db._id,
       });
       const newProductSaveChange = new ProductSaveChange({
         title: fm_title,
@@ -194,7 +197,7 @@ module.exports = {
   },
 
   /**
-   * Add new product category
+   * Get product detail
    */
   getDetail: async function (req, res) {
     const { id } = req.params;
@@ -232,6 +235,8 @@ module.exports = {
         responseRate: 100,
         responseTime: "trong vài giờ",
       };
+
+      console.log(product_db.shop);
 
       const product = {
         ...product_db,

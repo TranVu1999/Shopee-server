@@ -17,8 +17,16 @@ router.post('/confirm', verifyToken, invoiceController.verify);
 router.post('/', verifyToken, invoiceController.add);
 
 
-// @route POST api/invoice/management
-// @desc Get shop's invoice
+// ================= GET ==================
+// @route GET api/invoice
+// @desc Get uer's invoice
+// @access Private
+router.get('/', verifyToken, invoiceController.get);
+
+
+
+// @route GET api/invoice/management
+// @desc Get uer's invoice
 // @access Private
 router.get('/management', verifyToken, invoiceController.getListInvoiceByShop);
 

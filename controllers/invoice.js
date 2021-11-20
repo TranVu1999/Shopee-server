@@ -198,7 +198,7 @@ module.exports = {
    */
   getListInvoiceByShop: async function (req, res) {
     const { accountId } = req;
-
+    console.log({accountId})
     try {
       const shop_db = await Shop.findOne({ account: accountId });
 
@@ -216,7 +216,7 @@ module.exports = {
 
       const listInvoice = [];
       listInvoiceDetail_db.forEach(invoiceDetail_db => {
-        if(invoiceDetail_db.invoice.shop) {
+        if(invoiceDetail_db.invoice) {
           const {
             _id, total, 
             statuation, 
@@ -263,6 +263,82 @@ module.exports = {
             listInvoice.push(invoice);
           }
         }
+      })
+
+      return res.json({
+        success: true,
+        message: "Đặt hàng thành công!",
+        listInvoice
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
+
+  /**
+   * Function: Get list user's invoice,
+   * Params: accountId
+   * Description:
+   */
+  get: async function (req, res) {
+    const { accountId } = req;
+
+    try {
+
+      const listInvoiceDetail_db = await InvoiceDetail.find().lean()
+      .populate("product")
+      .populate({
+        path: "invoice",
+        match: {statuation: {$ne: "Đơn hàng đã đặt"}},
+        populate: [{
+          path: "account",
+          match: {_id: accountId},
+          select: "userLogin"
+        }, {path: "shop", select: "avatar brand"}]
+      });
+
+      const listInvoice = [];
+      listInvoiceDetail_db.forEach(invoiceDetail => {
+        if(invoiceDetail.invoice) {
+          const indexInvoice = listInvoice.findIndex(invoice => invoice._id.toString() === invoiceDetail.invoice._id.toString());
+
+          const product = {
+            _id: invoiceDetail.product._id,
+            title: invoiceDetail.product.title,
+            alias: invoiceDetail.product.alias,
+            avatar: invoiceDetail.image,
+            variant: invoiceDetail.variant,
+            price: invoiceDetail.price,
+            amount: invoiceDetail.amount
+          }
+  
+          if(indexInvoice === -1) {
+            const shop = {
+              _id: invoiceDetail.invoice.shop._id,
+              brand: invoiceDetail.invoice.shop.brand,
+              alias: invoiceDetail.invoice.shop.alias
+            }
+  
+            const newInvoice = {
+              _id: invoiceDetail.invoice._id,
+              statuation: invoiceDetail.invoice.statuation,
+              total: invoiceDetail.invoice.total,
+              shop,
+              listProduct: [product]
+            }
+  
+            listInvoice.push(newInvoice);
+  
+          } else {
+            listInvoice[indexInvoice].listProduct.push(product);
+          }
+        }
+        
       })
 
       return res.json({

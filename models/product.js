@@ -85,6 +85,10 @@ const ProductSchema = new Schema({
       type: Date,
       default: new Date()
   },
+  modifiedDate: {
+    type: Date,
+    default: new Date()
+  },
 
   soldNumber: {
       type: Number,
