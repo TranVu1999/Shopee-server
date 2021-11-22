@@ -166,7 +166,10 @@ module.exports = {
     const { type, page } = qdata;
 
     try {
-      const listProduct_db = await Product.find({ status: true }).lean();
+      const listProduct_db = await Product
+      .find({ status: true })
+      .sort({scoreView: -1})
+      .lean();
 
 
       let listProduct = [];
@@ -235,8 +238,6 @@ module.exports = {
         responseRate: 100,
         responseTime: "trong vài giờ",
       };
-
-      console.log(product_db.shop);
 
       const product = {
         ...product_db,

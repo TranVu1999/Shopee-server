@@ -114,6 +114,11 @@ const ProductSchema = new Schema({
   status: {
       type: Boolean,
       default: true
+  },
+
+  address: {
+    type: Schema.Types.ObjectId,
+    ref: "Address"
   }
 });
 

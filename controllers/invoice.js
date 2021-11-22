@@ -11,6 +11,53 @@ const Cart = require("./../models/cart");
 // Modules
 const Mailer = require("./../utils/mailer");
 
+const getInvoiceDetail = (listInvoiceDetail) => {
+  console.log({listInvoiceDetail});
+
+  const listInvoice = [];
+  listInvoiceDetail.forEach(invoiceDetail => {
+    if(invoiceDetail.invoice) {
+      const indexInvoice = listInvoice.findIndex(invoice => invoice._id.toString() === invoiceDetail.invoice._id.toString());
+
+      const product = {
+        _id: invoiceDetail.product._id,
+        title: invoiceDetail.product.title,
+        alias: invoiceDetail.product.alias,
+        avatar: invoiceDetail.image,
+        variant: invoiceDetail.variant,
+        price: invoiceDetail.price,
+        amount: invoiceDetail.amount
+      }
+
+      if(indexInvoice === -1) {
+        const shop = {
+          _id: invoiceDetail.invoice.shop._id,
+          brand: invoiceDetail.invoice.shop.brand,
+          alias: invoiceDetail.invoice.shop.alias
+        }
+
+        const newInvoice = {
+          _id: invoiceDetail.invoice._id,
+          statuation: invoiceDetail.invoice.statuation,
+          total: invoiceDetail.invoice.total,
+          route: invoiceDetail.invoice.route,
+          receivedAddress: invoiceDetail.invoice.receivedAddress,
+          shop,
+          listProduct: [product]
+        }
+
+        listInvoice.push(newInvoice);
+
+      } else {
+        listInvoice[indexInvoice].listProduct.push(product);
+      }
+    }
+    
+  });
+
+  return listInvoice;
+}
+
 module.exports = {
   /**
    * Function: add new invoice by user,
@@ -171,7 +218,10 @@ module.exports = {
         listInvoiceUpdate.push(
           Invoice.findOneAndUpdate(
             { account: accountId, _id: invoice_id },
-            { statuation: "Chờ xác nhận" }
+            { 
+              statuation: "Chờ xác nhận",
+              $push: {route: {time: new Date(), label: "Đã xác nhận thông tin thanh toán"}}
+            }
           )
         );
       });
@@ -302,49 +352,55 @@ module.exports = {
         }, {path: "shop", select: "avatar brand"}]
       });
 
-      const listInvoice = [];
-      listInvoiceDetail_db.forEach(invoiceDetail => {
-        if(invoiceDetail.invoice) {
-          const indexInvoice = listInvoice.findIndex(invoice => invoice._id.toString() === invoiceDetail.invoice._id.toString());
-
-          const product = {
-            _id: invoiceDetail.product._id,
-            title: invoiceDetail.product.title,
-            alias: invoiceDetail.product.alias,
-            avatar: invoiceDetail.image,
-            variant: invoiceDetail.variant,
-            price: invoiceDetail.price,
-            amount: invoiceDetail.amount
-          }
-  
-          if(indexInvoice === -1) {
-            const shop = {
-              _id: invoiceDetail.invoice.shop._id,
-              brand: invoiceDetail.invoice.shop.brand,
-              alias: invoiceDetail.invoice.shop.alias
-            }
-  
-            const newInvoice = {
-              _id: invoiceDetail.invoice._id,
-              statuation: invoiceDetail.invoice.statuation,
-              total: invoiceDetail.invoice.total,
-              shop,
-              listProduct: [product]
-            }
-  
-            listInvoice.push(newInvoice);
-  
-          } else {
-            listInvoice[indexInvoice].listProduct.push(product);
-          }
-        }
-        
-      })
+      const listInvoice = getInvoiceDetail(listInvoiceDetail_db);
+      
 
       return res.json({
         success: true,
         message: "Đặt hàng thành công!",
         listInvoice
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
+  /**
+   * Function: Get invoice detail,
+   * Params: accountId, invoiceId
+   * Description:
+   */
+   getDetail: async function (req, res) {
+    const { accountId } = req;
+    const invoiceId = req.params.id;
+
+    try {
+      const listInvoiceDetail_db = await InvoiceDetail
+      .find({invoice: invoiceId})
+      .lean()
+      .populate("product")
+      .populate({
+        path: "invoice",
+        match: {statuation: {$ne: "Đơn hàng đã đặt"}},
+        populate: [{
+          path: "account",
+          match: {_id: accountId},
+          select: "userLogin"
+        }, {path: "shop", select: "avatar brand"},
+        {path: "receivedAddress", select: "fullname phoneNumber houseNumber ward district province"}  
+        ]
+      });
+
+      const invoice = getInvoiceDetail(listInvoiceDetail_db)[0];
+
+      return res.json({
+        success: true,
+        message: "Đặt hàng thành công!",
+        invoice
       });
     } catch (error) {
       console.log(error);

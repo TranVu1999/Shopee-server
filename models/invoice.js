@@ -16,7 +16,7 @@ const InvoiceSchema = new Schema({
 
   message: {
     type: String,
-    default: ""
+    default: "",
   },
 
   receivedAddress: {
@@ -28,9 +28,25 @@ const InvoiceSchema = new Schema({
     type: Date,
     default: new Date(),
   },
+
+  modifiedDate: {
+    type: Date,
+    default: new Date(),
+  },
+
   total: {
     type: Number,
     default: 0,
+  },
+
+  route: {
+    type: Array,
+    default: [
+      {
+        time: new Date(),
+        label: "Đơn hàng đã đặt",
+      },
+    ],
   },
 
   statuation: {
@@ -42,7 +58,7 @@ const InvoiceSchema = new Schema({
       "Chuẩn bị hàng",
       "Chờ đóng gói",
       "Chờ lấy hàng",
-      "Đã gia đơn vị vận chuyển",
+      "Đã giao đơn vị vận chuyển",
       "Hết hàng",
       "Đang hủy",
       "Trả hàng/Hoàn tiền",

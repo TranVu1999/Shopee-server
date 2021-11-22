@@ -252,11 +252,16 @@ module.exports = {
 
         try {
             let res_prodCat = null;
+            let filter = {};
 
             switch(type){
                 case 'skeleton-attribute':
-                    const filter = {_id: id, isTop: true};
+                    filter = {_id: id, isTop: true};
                     res_prodCat = await ProductCategory.findOne(filter);
+                    break;
+                case 'top-sub-categories':
+                    filter = {path: id, isTop: true};
+                    res_prodCat = await ProductCategory.findOne(filter, {title: 1, alias: 1});
                     break;
                 default:
                     break;

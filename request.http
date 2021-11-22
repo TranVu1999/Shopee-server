@@ -402,7 +402,7 @@ GET http://localhost:5000/api/product-category
 
 # Get product category by id 
 ###
-GET http://localhost:5000/api/product-category/6152dc2bb1f01e09c0adadf9/skeleton-attribute
+GET http://localhost:5000/api/product-category/6152dc2bb1f01e09c0adadf9/top-sub-categories
 
 # Update a product category
 ###
@@ -827,5 +827,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 # Get list user's invoice
 ###
 GET http://localhost:5000/api/invoice
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNzM3MzY4M30.WKSG1D_Fu0KAa3TRdJUcfwXs95X1nMxI3nBB7pZyF0I
+
+
+
+# Get invoice detail
+###
+GET http://localhost:5000/api/invoice/6199f3dd50689d219c5b9c20
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNzM3MzY4M30.WKSG1D_Fu0KAa3TRdJUcfwXs95X1nMxI3nBB7pZyF0I

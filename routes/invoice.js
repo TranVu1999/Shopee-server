@@ -23,6 +23,10 @@ router.post('/', verifyToken, invoiceController.add);
 // @access Private
 router.get('/', verifyToken, invoiceController.get);
 
+// @route GET api/invoice/id
+// @desc Get invoice detail
+// @access Private
+router.get('/:id', verifyToken, invoiceController.getDetail);
 
 
 // @route GET api/invoice/management
