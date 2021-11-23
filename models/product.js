@@ -116,7 +116,7 @@ const ProductSchema = new Schema({
       default: true
   },
 
-  address: {
+  deliveryAddress: {
     type: Schema.Types.ObjectId,
     ref: "Address"
   }

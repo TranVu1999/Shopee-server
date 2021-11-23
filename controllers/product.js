@@ -60,6 +60,60 @@ function getListProductByCategory(listProduct, category) {
   });
 }
 
+function getProductOfManClothes(listProduct, filter) {
+  let res = getListProductByCategory(listProduct, "thoi-trang-nam");
+  let lengthProduct = res.length;
+  const {
+    page,
+    topCategory,
+    deliveryAddress,
+    brand,
+    selectType,
+    sort,
+    from,
+    to,
+  } = filter;
+
+  if (topCategory) {
+    const temp = [];
+
+    for (let i = 0; i < lengthProduct; i++) {
+      const topCateProd = res[i].categories[res[i].categories.length - 1];
+      let strFormatCategory = Format.removeAccents(topCateProd).replace(
+        /\s+/g,
+        ""
+      );
+
+      if (topCategory.replace(/-/g, "") === strFormatCategory) {
+        temp.push(res[i]);
+      }
+    }
+
+    res = temp;
+  }
+
+  if (deliveryAddress) {
+    const temp = [];
+    const lengthProduct = res.length;
+
+    for (let i = 0; i < lengthProduct; i++) {
+      const provinceDeliveryAddress = res[i].deliveryAddress.province;
+      let strAddress = Format.removeAccents(provinceDeliveryAddress).replace(
+        /\s+/g,
+        ""
+      ).toLowerCase();
+
+      if (deliveryAddress.replace(/-/g, "") === strAddress) {
+        temp.push(res[i]);
+      }
+    }
+
+    res = temp;
+  }
+
+  return res;
+}
+
 module.exports = {
   /**
    * Add new product category
@@ -84,7 +138,7 @@ module.exports = {
     try {
       const [account_db, shop_db] = await Promise.all([
         Account.findById(accountId),
-        Shop.findOne({account: accountId})
+        Shop.findOne({ account: accountId }),
       ]);
 
       if (!account_db && (role === "owner" || role === "admin")) {
@@ -163,24 +217,39 @@ module.exports = {
 
     const q = url.parse(fullUrl, true);
     const qdata = q.query;
-    const { type, page } = qdata;
+    const { category } = qdata;
 
     try {
-      const listProduct_db = await Product
-      .find({ status: true })
-      .sort({scoreView: -1})
-      .lean();
-
+      const listProduct_db = await Product.find({ status: true })
+        .sort({ scoreView: -1 })
+        .populate("deliveryAddress")
+        .lean();
 
       let listProduct = [];
 
-      switch (type) {
-        case "category":
-          const { category } = qdata;
-          listProduct = getListProductByCategory(listProduct_db, category);
-          break;
+      switch (category) {
+        case "thoi-trang-nam":
+          const {
+            page,
+            topCategory,
+            deliveryAddress,
+            brand,
+            selectType,
+            sort,
+            from,
+            to,
+          } = qdata;
+          listProduct = getProductOfManClothes(listProduct_db, {
+            page,
+            topCategory,
+            deliveryAddress,
+            brand,
+            selectType,
+            sort,
+            from,
+            to,
+          });
         default:
-          listProduct = listProduct_db;
           break;
       }
 
@@ -188,6 +257,90 @@ module.exports = {
         success: true,
         message: "Dữ liệu được cập nhật",
         listProduct,
+      });
+    } catch (error) {
+      console.log(error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
+  /**
+   * Get list product's delivery address
+   */
+  getListDeliveryAddress: async function (req, res) {
+    const { rootCategoryId } = req.params;
+
+    try {
+      const rootCategory = await ProductCategory.findById(
+        rootCategoryId
+      ).lean();
+
+      console.log({ rootCategory });
+
+      const listProduct_db = await Product.find({
+        status: true,
+        categories: rootCategory.title,
+      })
+        .sort({ scoreView: -1 })
+        .populate("deliveryAddress")
+        .lean();
+
+      let listAddress = [];
+
+      listAddress = [
+        ...new Set(
+          listProduct_db.map((prod_db) => prod_db.deliveryAddress.province)
+        ),
+      ];
+
+      return res.json({
+        success: true,
+        message: "Dữ liệu được cập nhật",
+        listAddress,
+      });
+    } catch (error) {
+      console.log(error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  },
+
+  /**
+   * Get list product's brand
+   */
+  getListBrand: async function (req, res) {
+    const { rootCategoryId } = req.params;
+
+    try {
+      const rootCategory = await ProductCategory.findById(
+        rootCategoryId
+      ).lean();
+
+      const listProduct_db = await Product.find({
+        status: true,
+        categories: rootCategory.title,
+      })
+        .sort({ scoreView: -1 })
+        .populate("deliveryAddress")
+        .lean();
+
+      const listBrand = [
+        ...new Set(
+          listProduct_db.map((prod_db) => prod_db.optionalAttributes.brand)
+        ),
+      ];
+
+      return res.json({
+        success: true,
+        message: "Dữ liệu được cập nhật",
+        listBrand: listBrand.filter((brand) => brand),
       });
     } catch (error) {
       console.log(error);
@@ -208,21 +361,24 @@ module.exports = {
     try {
       const [product_db] = await Promise.all([
         Product.findOne({ _id: id, status: true })
-        .lean()
-        .populate({
-          path: "shop",
-          select: "avatar brand alias listTracker createdDate",
-          populate: {
-            path: "account",
-            select: "role"
-          }
-        }),
-        Product.findOneAndUpdate({ _id: id }, { $inc: { viewedNumber: 1, scoreView: 1 } }),
+          .lean()
+          .populate({
+            path: "shop",
+            select: "avatar brand alias listTracker createdDate",
+            populate: {
+              path: "account",
+              select: "role",
+            },
+          }),
+        Product.findOneAndUpdate(
+          { _id: id },
+          { $inc: { viewedNumber: 1, scoreView: 1 } }
+        ),
       ]);
 
       const [amountProduct, listProductOfStore] = await Promise.all([
-        Product.countDocuments({shop: product_db.shop}),
-        Product.find({shop: product_db.shop}).sort("soldNumber").limit(5), // lấy top 5 sản phẩm bán chạy nhất
+        Product.countDocuments({ shop: product_db.shop }),
+        Product.find({ shop: product_db.shop }).sort("soldNumber").limit(5), // lấy top 5 sản phẩm bán chạy nhất
       ]);
 
       const store = {

@@ -261,7 +261,7 @@ module.exports = {
                     break;
                 case 'top-sub-categories':
                     filter = {path: id, isTop: true};
-                    res_prodCat = await ProductCategory.findOne(filter, {title: 1, alias: 1});
+                    res_prodCat = await ProductCategory.find(filter, {title: 1, alias: 1});
                     break;
                 default:
                     break;

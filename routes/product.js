@@ -19,6 +19,16 @@ router.post('/', verifyToken, productController.add);
 // @access Public
 router.get('/filter', productController.filter);
 
+// @route GET api/product/list-delivery-address/:rootCategory
+// @desc get list product's delivery address
+// @access Public
+router.get('/list-delivery-address/:rootCategoryId', productController.getListDeliveryAddress);
+
+// @route GET api/product/list-delivery-address/:rootCategory
+// @desc get list product's delivery address
+// @access Public
+router.get('/list-brand/:rootCategoryId', productController.getListBrand);
+
 
 // @route GET api/product/:id
 // @desc get detail product
