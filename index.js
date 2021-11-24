@@ -11,6 +11,7 @@ const addressRouter = require('./routes/address');
 const administrativeUnitRouter = require('./routes/administrative_unit');
 const cartRouter = require('./routes/cart');
 const invoiceRouter = require('./routes/invoice');
+const productKeywordRouter = require('./routes/product_keyword');
 
 // connect mongodb
 const connectDB = async () =>{
@@ -64,6 +65,7 @@ app.use('/api/address', addressRouter);
 app.use('/api/administrative-unit', administrativeUnitRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/invoice', invoiceRouter);
+app.use('/api/product-keyword', productKeywordRouter);
 
 
 const POST = 5000;

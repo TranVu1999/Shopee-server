@@ -52,6 +52,11 @@ const AccountSchema = new Schema({
     status: {
         type: Boolean,
         default: true
+    },
+
+    productKeyword: {
+        type: Array,
+        default: []
     }
 });
 

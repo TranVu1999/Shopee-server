@@ -706,7 +706,7 @@ Content-Type: application/json
 
 # Get list product by category
 ###
-GET http://localhost:5000/api/product/filter?category=thoi-trang-nam&page=0&topCategory=ao-thun&deliveryAddress=tinh-quang-ngai&brand=ivy-moda&selectType=popular&sort=none&from=100000&to=200000
+GET http://localhost:5000/api/product/filter?category=thoi-trang-nam&page=0&topCategory=&deliveryAddress=tinh-quang-ngai&brand=adam-store&selectType=popular&sort=none&from=100000&to=200000
 Content-Type: application/json
 
 # Get list product's delivery address
@@ -848,3 +848,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
 GET http://localhost:5000/api/invoice/6199f3dd50689d219c5b9c20
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNzM3MzY4M30.WKSG1D_Fu0KAa3TRdJUcfwXs95X1nMxI3nBB7pZyF0I
+
+
+
+// ================== Product Keyword ==================
+# Add new product's key word
+###
+POST http://localhost:5000/api/product-keyword
+Content-Type: application/json
+
+{ 
+    "listKeyword": ["Thời trang nữ"],
+    "listProduct": ["6198ae3fe083001e78858d3f"],
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNzM3MzY4M30.WKSG1D_Fu0KAa3TRdJUcfwXs95X1nMxI3nBB7pZyF0I"
+}
+
+
+# Get list product's keyword
+###
+get http://localhost:5000/api/product-keyword/ao-thun-nam
+Content-Type: application/json

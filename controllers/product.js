@@ -111,6 +111,29 @@ function getProductOfManClothes(listProduct, filter) {
     res = temp;
   }
 
+  if(brand) {
+    const temp = [];
+    const lengthProduct = res.length;
+
+    for (let i = 0; i < lengthProduct; i++) {
+      const prodBrand = res[i].optionalAttributes.brand;
+
+      if(prodBrand) {
+        let strBrand = Format.removeAccents(prodBrand).replace(
+          /\s+/g,
+          ""
+        ).toLowerCase();
+  
+        if (strBrand === brand.replace(/-+/g, "")) {
+          temp.push(res[i]);
+        }
+      }
+      
+    }
+
+    res = temp;
+  }
+
   return res;
 }
 
