@@ -6,6 +6,7 @@ const ProductCategory = require("./../models/product_category");
 const Product = require("./../models/product");
 const ProductSaveChange = require("./../models/product_save_change");
 const Shop = require("./../models/shop");
+const ProductKeyword = require("./../models/product_keyword");
 
 //Modules
 const Format = require("./../utils/format");
@@ -98,10 +99,9 @@ function getProductOfManClothes(listProduct, filter) {
 
     for (let i = 0; i < lengthProduct; i++) {
       const provinceDeliveryAddress = res[i].deliveryAddress.province;
-      let strAddress = Format.removeAccents(provinceDeliveryAddress).replace(
-        /\s+/g,
-        ""
-      ).toLowerCase();
+      let strAddress = Format.removeAccents(provinceDeliveryAddress)
+        .replace(/\s+/g, "")
+        .toLowerCase();
 
       if (deliveryAddress.replace(/-/g, "") === strAddress) {
         temp.push(res[i]);
@@ -111,24 +111,22 @@ function getProductOfManClothes(listProduct, filter) {
     res = temp;
   }
 
-  if(brand) {
+  if (brand) {
     const temp = [];
     const lengthProduct = res.length;
 
     for (let i = 0; i < lengthProduct; i++) {
       const prodBrand = res[i].optionalAttributes.brand;
 
-      if(prodBrand) {
-        let strBrand = Format.removeAccents(prodBrand).replace(
-          /\s+/g,
-          ""
-        ).toLowerCase();
-  
+      if (prodBrand) {
+        let strBrand = Format.removeAccents(prodBrand)
+          .replace(/\s+/g, "")
+          .toLowerCase();
+
         if (strBrand === brand.replace(/-+/g, "")) {
           temp.push(res[i]);
         }
       }
-      
     }
 
     res = temp;
@@ -156,7 +154,7 @@ module.exports = {
       price,
       unused,
       sku,
-      deliveryAddress
+      deliveryAddress,
     } = req.body;
 
     try {
@@ -207,7 +205,7 @@ module.exports = {
         unused,
         sku,
         shop: shop_db._id,
-        deliveryAddress
+        deliveryAddress,
       });
       const newProductSaveChange = new ProductSaveChange({
         title: fm_title,
@@ -217,7 +215,36 @@ module.exports = {
         modifiedBy: accountId,
       });
 
-      await Promise.all([newProduct.save(), newProductSaveChange.save()]);
+      // add to keyword
+      const listPromiseProductKeyword = [];
+      categories.forEach((cate) => {
+        console.log({ cate });
+        listPromiseProductKeyword.push(
+          ProductKeyword.findOneAndUpdate(
+            { keyword: cate },
+            {
+              $push: { listProduct: newProduct._id },
+            },
+            { upsert: true }
+          )
+        );
+      });
+
+      listPromiseProductKeyword.push(
+        ProductKeyword.findOneAndUpdate(
+          { title },
+          {
+            $push: { listProduct: newProduct._id },
+          },
+          { upset: true }
+        )
+      );
+
+      await Promise.all([
+        newProduct.save(),
+        newProductSaveChange.save(),
+        ...listPromiseProductKeyword,
+      ]);
 
       return res.json({
         success: true,

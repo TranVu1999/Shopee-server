@@ -7,9 +7,7 @@ const Account = require("./../models/account");
 const Format = require("./../utils/format");
 
 const addNewProductKeyword = async (listKeyword, listProduct) => {
-    listKeyword.forEach(keyword => {
-        
-    });
+
     const listProdKeyword_db = await Promise.all(
         listKeyword.map(keyword => ProductKeyword.findOne({keyword}).lean())
     );
