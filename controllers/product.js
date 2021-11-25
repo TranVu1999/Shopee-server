@@ -156,6 +156,7 @@ module.exports = {
       price,
       unused,
       sku,
+      deliveryAddress
     } = req.body;
 
     try {
@@ -206,6 +207,7 @@ module.exports = {
         unused,
         sku,
         shop: shop_db._id,
+        deliveryAddress
       });
       const newProductSaveChange = new ProductSaveChange({
         title: fm_title,
