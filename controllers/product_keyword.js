@@ -13,13 +13,17 @@ const addNewProductKeyword = async (listKeyword, listProduct) => {
     );
 
     const promises = [];
-    listProdKeyword_db.forEach(prodKeyword_db => {
+    listProdKeyword_db.forEach((prodKeyword_db, index) => {
         if(prodKeyword_db) {
             const listProductUpdate = [];
             listProduct.forEach(prod => {
-                const isExist = prodKeyword_db.listProduct.some(prod_db => prod_db.toString() === prod);
+                const isExist = prodKeyword_db.listProduct.some(prod_db => prod_db.productId === prod);
+
                 if(!isExist) {
-                    listProductUpdate.push(prod);
+                    listProductUpdate.push({
+                        productId: prod,
+                        score: 0
+                    });
                 }
             });
     
@@ -31,8 +35,8 @@ const addNewProductKeyword = async (listKeyword, listProduct) => {
             }
         } else {
             const newProductKeyword = new ProductKeyword({
-                keyword,
-                listProduct
+                keyword: listKeyword[index],
+                listProduct: listProduct.map(prod => ({productId: prod, score: 0}))
             });
     
             promises.push(newProductKeyword.save());
@@ -78,12 +82,6 @@ module.exports = {
         const {listKeyword, listProduct, accessToken } = req.body;
 
         try {
-        if (accessToken) {
-            const decoded = jwt.verify(
-            accessToken,
-            process.env.ACCESS_TOKEN_SECRET
-            );        
-        }
 
         await addNewProductKeyword(listKeyword, listProduct);
 

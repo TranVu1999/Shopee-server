@@ -12,10 +12,10 @@ const ProductKeywordSchema = new Schema({
         default: 0
     },
 
-    listProduct: [{
-        type: Schema.Types.ObjectId,
-        ref: "Product"
-    }],    
+    listProduct: {
+        type: Array,
+        default: []
+    },    
 });
 
 

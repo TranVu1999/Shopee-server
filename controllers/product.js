@@ -135,6 +135,37 @@ function getProductOfManClothes(listProduct, filter) {
   return res;
 }
 
+const addNewProductKeyword = async (listKeyword, product) => {
+
+  const listProdKeyword_db = await Promise.all(
+      listKeyword.map(keyword => ProductKeyword.findOne({keyword}).lean())
+  );
+
+  const promises = [];
+  listProdKeyword_db.forEach((prodKeyword_db, index) => {
+      if(prodKeyword_db) {
+          const isExist = prodKeyword_db.listProduct.some(prod_db => prod_db.productId === product.toString());
+  
+          if(!isExist) {
+              promises.push(ProductKeyword.findByIdAndUpdate(
+                  prodKeyword_db._id, 
+                  {$push: { listProduct: {productId: product, score: 0} } }
+              ))
+          }
+      } else {
+          const newProductKeyword = new ProductKeyword({
+              keyword: listKeyword[index],
+              listProduct: {productId: product, score: 0}
+          });
+  
+          promises.push(newProductKeyword.save());
+      }
+  });
+
+  await Promise.all(promises);   
+
+}
+
 module.exports = {
   /**
    * Add new product category
@@ -213,37 +244,12 @@ module.exports = {
         listPrice,
         classification,
         modifiedBy: accountId,
-      });
-
-      // add to keyword
-      const listPromiseProductKeyword = [];
-      categories.forEach((cate) => {
-        console.log({ cate });
-        listPromiseProductKeyword.push(
-          ProductKeyword.findOneAndUpdate(
-            { keyword: cate },
-            {
-              $push: { listProduct: newProduct._id },
-            },
-            { upsert: true }
-          )
-        );
-      });
-
-      listPromiseProductKeyword.push(
-        ProductKeyword.findOneAndUpdate(
-          { title },
-          {
-            $push: { listProduct: newProduct._id },
-          },
-          { upset: true }
-        )
-      );
+      });      
 
       await Promise.all([
         newProduct.save(),
         newProductSaveChange.save(),
-        ...listPromiseProductKeyword,
+        addNewProductKeyword([...categories, title], newProduct._id)
       ]);
 
       return res.json({

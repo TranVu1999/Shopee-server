@@ -696,7 +696,32 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2M
     "avatar": "https://firebasestorage.googleapis.com/v0/b/shopee-5da7d.appspot.com/o/products%2F37d2acf0dbe662ef51fd81c1f2bdc345.jpg?alt=media&token=d8e358ec-fb8b-469c-a97f-78ae8e5918e1",
     "categories": ["Thời Trang Nam", "Áo", "Áo thun"],
     
-    "title": "[mabrak99 giảm 10% đơn 99k]áo sơ mi nam tay dài công sở akuba dáng ôm, vải lụa không nhăn, thấm hút mồ hôi tốt 01ab2044"
+    "title": "váy hai dây hoa nhí/ áo khoác cardigan mỏng ht01 phong cách hàn quốc",
+    "description": "
+✅Váy 2 lớp: lớp ngoài chất đũi lạnh, lớp lót chất habutai
+- Chất liệu đũi lạnh: mát, thấm hút mồ hôi nhưng dày dặn không bị xuyên thấu, dáng váy chảy và bay nhẹ nhàng
+- Mua 1 được 2: Set gồm một váy 2 dây dáng dài hoa nhí vàng ngực xếp ly kết hợp một áo Cardigan mỏng màu trắng cực xinh xắn và tiện lợi
+
+✅- Bảng size tham khảo: (đo eo trên rốn 5-7cm)
+XS: dài váy 94cm, eo 62, ngực 70-82, 43kg đổ lại
+S: dài váy 96cm, eo 66, ngực 74-85, 43- 50
+M: dài váy 98cm, eo 72, ngực 78-90, 50-55
+L: dài váy 100cm, eo 78, ngực 82-96, 55-60kg
+Sản phẩm có sự sai số 1-3cm
+- Lưng chun trên cùng kết hợp khoá, eo ngực linh động nên thông số eo sẽ hơi lớn 
+
+⚠️ Bạn nào sợ rộng eo thì ib shop số đo eo, shop sẽ sửa eo trước khi gửi cho khách ạ!!⚠️
+
+❌ Vui lòng nhắn tin để hỗ trợ tư vấn size, không hỗ trợ đổi trả nếu khách tự ý chọn size mà không vừa ❌
+
+- Dài váy ~ 1m qua đầu gối 15-20p
+- Thích hợp cho mặc đi chơi, đi tiệc và đi biển.
+
+HALUU STORE
++ Chuyên hàng order Trung mẫu mã đa dạnh giá cạnh tranh.
++ Nhận order theo link, theo ảnh
++ Hotline: 0973332390
++ Page: http://www.facebook.com/HaLuu.Store/"
 }
 
 # Get list product by category
@@ -858,13 +883,12 @@ POST http://localhost:5000/api/product-keyword
 Content-Type: application/json
 
 { 
-    "listKeyword": ["Thời trang nữ"],
-    "listProduct": ["6198ae3fe083001e78858d3f"],
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTg0MWFiMjJmMzEzYjIwODg2Yjk3MTUiLCJyb2xlIjoidXNlciIsImlhdCI6MTYzNzM3MzY4M30.WKSG1D_Fu0KAa3TRdJUcfwXs95X1nMxI3nBB7pZyF0I"
+    "listKeyword": ["váy"],
+    "listProduct": ["6198ae3fe083001e78858d3f", "61a047aa28d93e32406a2432"]
 }
 
 
 # Get list product's keyword
 ###
-get http://localhost:5000/api/product-keyword/ao-thun-nam
+get http://localhost:5000/api/product-keyword/vay
 Content-Type: application/json
