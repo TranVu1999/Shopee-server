@@ -29,7 +29,7 @@ Content-Type: application/json
 {
     "userLogin": "tranvudpqn123@gmail.com",
     "password": "TranTheNam1999@",
-    "role": "admin"
+    "role": "user"
 }
 
 # Login
@@ -729,10 +729,44 @@ HALUU STORE
 GET http://localhost:5000/api/product?type=all
 Content-Type: application/json
 
+
+
+
+
+
+
+
 # Get list product by category
 ###
-GET http://localhost:5000/api/product/filter?category=thoi-trang-nam&page=0&topCategory=&deliveryAddress=tinh-quang-ngai&brand=adam-store&selectType=popular&sort=none&from=100000&to=200000
+GET http://localhost:5000/api/product/filter?brand=&category=thoi-trang-nam&deliveryAddress=&from=0&limit=18&page=0&search=&selectType=popular&sort=&to=0&topCategory=
 Content-Type: application/json
+
+
+
+
+
+
+
+
+
+
+
+
+# Get list product by keysearch
+###
+GET http://localhost:5000/api/product/filter?search=ao-thun&page=0&topCategory=&deliveryAddress=&brand=&selectType=popular&sort=none&from=100000&to=200000
+Content-Type: application/json
+
+
+
+
+
+
+
+
+
+
+
 
 # Get list product's delivery address
 ###
@@ -747,7 +781,7 @@ Content-Type: application/json
 
 # get product
 ###
-GET http://localhost:5000/api/product/61987d5befdf751f9c89895a
+GET http://localhost:5000/api/product/617d780b3821802c10db2eb8
 Content-Type: application/json
 
 
@@ -888,7 +922,7 @@ Content-Type: application/json
 }
 
 
-# Get list product's keyword
+# Get list keyword matches
 ###
-get http://localhost:5000/api/product-keyword/vay
+get http://localhost:5000/api/product-keyword/ao-thun
 Content-Type: application/json

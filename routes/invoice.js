@@ -18,6 +18,11 @@ router.post('/', verifyToken, invoiceController.add);
 
 
 // ================= GET ==================
+// @route GET api/invoice/management
+// @desc Get uer's invoice
+// @access Private
+router.get('/management', verifyToken, invoiceController.getListInvoiceByShop);
+
 // @route GET api/invoice
 // @desc Get uer's invoice
 // @access Private
@@ -29,10 +34,7 @@ router.get('/', verifyToken, invoiceController.get);
 router.get('/:id', verifyToken, invoiceController.getDetail);
 
 
-// @route GET api/invoice/management
-// @desc Get uer's invoice
-// @access Private
-router.get('/management', verifyToken, invoiceController.getListInvoiceByShop);
+
 
 
 

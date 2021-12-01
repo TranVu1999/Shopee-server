@@ -248,8 +248,6 @@ module.exports = {
     getById: async function(req, res){  
         const {id, type} = req.params;
 
-        console.log({id, type});
-
         try {
             let res_prodCat = null;
             let filter = {};

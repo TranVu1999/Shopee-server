@@ -162,7 +162,7 @@ module.exports = {
                     accessToken
                 });
 
-            } else if(!Validate.checkRequireFieldString(userLogin, password, role)) {
+            } else if(!Validate.checkRequireFieldString(userLogin, password)) {
                 return res
                 .json({success: false, message: "Thiếu thông tin đăng nhập"})
             }

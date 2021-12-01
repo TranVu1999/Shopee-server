@@ -248,7 +248,7 @@ module.exports = {
    */
   getListInvoiceByShop: async function (req, res) {
     const { accountId } = req;
-    console.log({accountId})
+    console.log("hello");
     try {
       const shop_db = await Shop.findOne({ account: accountId });
 
